@@ -10,7 +10,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.json({ msg: "Hello" });
+  res.json({ msg: "Hello World" });
 });
 
 const URL = process.env.MONGODB_URL;
