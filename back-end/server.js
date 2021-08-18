@@ -12,6 +12,7 @@ app.use(cookieParser());
 //Routes
 app.use("/api", require("./routes/authRouter"));
 
+//Connect to MongoDB
 const URL = process.env.MONGODB_URL;
 mongoose.connect(
   URL,
@@ -29,5 +30,5 @@ mongoose.connect(
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log("Server is running at 5000");
+  console.log(`Server is running at ${port}`);
 });

@@ -21,6 +21,7 @@ const authCtrl = {
           .status(400)
           .json({ msg: "Password must be at least 6 characters" });
 
+      //Password encryption
       const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = new Users({
@@ -30,8 +31,19 @@ const authCtrl = {
         password: passwordHash,
       });
 
+      //Create jsonwebtoken to authentication
       const access_token = createAccessToken({ id: newUser._id });
       const refresh_token = createRefreshToken({ id: newUser._id });
+
+      //Cookie
+      res.cookie("refreshtoken", refresh_token, {
+        httpOnly: true,
+        path: "/api/refresh_token",
+        maxAge: 22 * 24 * 60 * 60 * 1000, //22 days
+      });
+
+      //Save MongoDB
+      await newUser.save();
 
       res.json({
         msg: "Register thành công rồi !",
@@ -39,7 +51,7 @@ const authCtrl = {
         user: {
           //_doc để trả lại thông tin cần thiết người dùng
           ...newUser._doc,
-          //password: "",
+          password: "",
         },
       });
     } catch (error) {
@@ -74,7 +86,7 @@ const createAccessToken = (payload) => {
 //Refresh Token
 const createRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: "42d",
+    expiresIn: "22d",
   });
 };
 
