@@ -35,7 +35,7 @@ const authCtrl = {
       const access_token = createAccessToken({ id: newUser._id });
       const refresh_token = createRefreshToken({ id: newUser._id });
 
-      //Cookie
+      // Thiết lập Cookie
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
         path: "/api/refresh_token",
@@ -46,7 +46,7 @@ const authCtrl = {
       await newUser.save();
 
       res.json({
-        msg: "Register thành công rồi !",
+        msg: "Đăng ký thành công rồi !",
         access_token,
         user: {
           //_doc để trả lại thông tin cần thiết người dùng
@@ -60,12 +60,48 @@ const authCtrl = {
   },
   login: async (req, res) => {
     try {
+      const { email, password } = req.body;
+
+      const user = await Users.findOne({ email }).populate(
+        "followers following",
+        // MongoDB no return password
+        "-password"
+      );
+      if (!user)
+        return res.status(400).json({ msg: "This email does not exist." });
+
+      const matchPassword = await bcrypt.compare(password, user.password);
+      if (!matchPassword)
+        return res.status(400).json({ msg: "Password is incorrect" });
+
+      //Create jsonwebtoken to authentication
+      const access_token = createAccessToken({ id: user._id });
+      const refresh_token = createRefreshToken({ id: user._id });
+
+      // Thiết lập Cookie
+      res.cookie("refreshtoken", refresh_token, {
+        httpOnly: true,
+        path: "/api/refresh_token",
+        maxAge: 22 * 24 * 60 * 60 * 1000, //22 days
+      });
+
+      res.json({
+        msg: "Đăng nhạp thành công rồi !",
+        access_token,
+        user: {
+          //_doc để trả lại thông tin cần thiết người dùng
+          ...user._doc,
+          password: "",
+        },
+      });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
   logout: async (req, res) => {
     try {
+      res.clearCookie("refreshtoken", { path: "/api/refresh_token" });
+      return res.json({ msg: "Đăng xuất thành công !" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
