@@ -108,6 +108,27 @@ const authCtrl = {
   },
   generateAccessToken: async (req, res) => {
     try {
+      const rftoken = req.cookies.refreshtoken;
+      if (!rftoken)
+        return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
+
+      jwt.verify(
+        rftoken,
+        process.env.REFRESH_TOKEN_SECRET,
+        async (err, result) => {
+          if (err) return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
+
+          const user = await Users.findById(result.id)
+            .select("-password")
+            .populate("followers following", "-password");
+
+          if (!user) return res.status(400).json({ msg: "Không tồn tại" });
+
+          const access_token = createAccessToken({ id: result.id });
+
+          res.json({ access_token, user });
+        }
+      );
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
