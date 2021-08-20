@@ -1,6 +1,6 @@
 import React from "react";
 
-const error = () => {
+const Error = () => {
   return (
     <div
       className="position-relative"
@@ -18,4 +18,4 @@ const error = () => {
   );
 };
 
-export default error;
+export default Error;

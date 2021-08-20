@@ -39,7 +39,7 @@ const authCtrl = {
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
         path: "/api/refresh_token",
-        maxAge: 22 * 24 * 60 * 60 * 1000, //22 days
+        maxAge: 412 * 24 * 60 * 60 * 1000, //412 days
       });
 
       //Save MongoDB
@@ -82,7 +82,7 @@ const authCtrl = {
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
         path: "/api/refresh_token",
-        maxAge: 22 * 24 * 60 * 60 * 1000, //22 days
+        maxAge: 412 * 24 * 60 * 60 * 1000, //412 days
       });
 
       res.json({
@@ -111,22 +111,24 @@ const authCtrl = {
       const rftoken = req.cookies.refreshtoken;
       if (!rftoken)
         return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
-
+      //Middleware làm mới accessToken
       jwt.verify(
         rftoken,
         process.env.REFRESH_TOKEN_SECRET,
         async (err, result) => {
           if (err) return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
-
+          //result = data of payload id,iat,exptime,...
           const user = await Users.findById(result.id)
             .select("-password")
             .populate("followers following", "-password");
-
           if (!user) return res.status(400).json({ msg: "Không tồn tại" });
 
           const access_token = createAccessToken({ id: result.id });
 
-          res.json({ access_token, user });
+          res.json({
+            access_token,
+            user,
+          });
         }
       );
     } catch (error) {
@@ -143,7 +145,7 @@ const createAccessToken = (payload) => {
 //Refresh Token
 const createRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: "22d",
+    expiresIn: "412d",
   });
 };
 
