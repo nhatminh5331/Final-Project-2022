@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { login } from '../redux/actions/authAction'
+import { useDispatch } from "react-redux";
+
 
 
 const Login = () => {
@@ -8,15 +11,21 @@ const Login = () => {
 
   const [showPass, setShowPass] = useState(false)
 
+  const dispatch = useDispatch()
 
   const handleChangeInput = (event) => {
       setUserInput({...userInput, [event.target.name]: event.target.value})
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(login(userInput))
+}
+
   return (
     //Bootstrap4.5 form
     <div className="auth_page">
-        <form>
+        <form onSubmit={handleSubmit}>
             <h2 className="text-uppercase text-center mb-4 font-weight-bold">Tiny Social</h2>
 
             <div className="form-group font-weight-bold">
