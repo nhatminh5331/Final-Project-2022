@@ -10,16 +10,16 @@ const authCtrl = {
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)
-        return res.status(400).json({ msg: "This username already exists." });
+        return res.status(400).json({ msg: "Tên đăng nhập đã tồn tại" });
 
       const user_email = await Users.findOne({ email });
       if (user_email)
-        return res.status(400).json({ msg: "This email already exists." });
+        return res.status(400).json({ msg: "Email này đã tồn tại" });
 
       if (password.length < 6)
         return res
           .status(400)
-          .json({ msg: "Password must be at least 6 characters" });
+          .json({ msg: "Mật khẩu phải có ít nhất 6 kí tự" });
 
       //Password encryption
       const passwordHash = await bcrypt.hash(password, 12);
@@ -46,7 +46,7 @@ const authCtrl = {
       await newUser.save();
 
       res.json({
-        msg: "Đăng ký thành công rồi !",
+        msg: "Đăng ký thành công! Hãy kích hoạt tài khoản qua email.",
         access_token,
         user: {
           //_doc để trả lại thông tin cần thiết người dùng
@@ -68,11 +68,11 @@ const authCtrl = {
         "-password"
       );
       if (!user)
-        return res.status(400).json({ msg: "This email does not exist." });
+        return res.status(400).json({ msg: "Email không tồn tại !" });
 
       const matchPassword = await bcrypt.compare(password, user.password);
       if (!matchPassword)
-        return res.status(400).json({ msg: "Password is incorrect" });
+        return res.status(400).json({ msg: "Mật khẩu không chính xác !" });
 
       //Create jsonwebtoken to authentication
       const access_token = createAccessToken({ id: user._id });
@@ -86,7 +86,7 @@ const authCtrl = {
       });
 
       res.json({
-        msg: "Đăng nhạp thành công rồi !",
+        msg: "Đăng nhập thành công !",
         access_token,
         user: {
           //_doc để trả lại thông tin cần thiết người dùng
@@ -110,13 +110,13 @@ const authCtrl = {
     try {
       const rftoken = req.cookies.refreshtoken;
       if (!rftoken)
-        return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
+        return res.status(400).json({ msg: "Xin hãy đăng nhập" });
       //Middleware làm mới accessToken
       jwt.verify(
         rftoken,
         process.env.REFRESH_TOKEN_SECRET,
         async (err, result) => {
-          if (err) return res.status(400).json({ msg: "Làm ơn hãy đăng nhập" });
+          if (err) return res.status(400).json({ msg: "Xin hãy đăng nhập" });
           //result = data of payload id,iat,exptime,...
           const user = await Users.findById(result.id)
             .select("-password")

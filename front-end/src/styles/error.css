@@ -1,0 +1,37 @@
+.error_form{
+    position: relative;
+    min-height: 100vh;
+}
+.error_form h1{
+    font-weight: bold;
+    font-size: 140px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.error_form p{
+    font-size: 52px;
+}
+@media screen and (max-width: 768px){
+    .error_form h1{
+    font-size: 105px;
+    }
+    .error_form p{
+        font-size: 34px;
+    }
+}
+ 
+     
+
+
+  
+       
+
+
+
+  
+
+
+
+

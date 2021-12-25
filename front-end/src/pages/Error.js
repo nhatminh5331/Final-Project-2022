@@ -1,18 +1,14 @@
 import React from "react";
+import 'boxicons'
 
 const Error = () => {
   return (
-    <div
-      className="position-relative"
-      style={{
-        minHeight: "calc(100vh - 70px)",
-      }}
-    >
-      <h1
-        className="position-absolute text-secondary"
-        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-      >
-        Well...Page not found 404
+    <div className="error_form">
+      <h1 className=" text-center">
+      4<box-icon name='sad' animation='tada' size='110px' ></box-icon>4
+      <p className="text-center">
+      Page not found
+      </p>
       </h1>
     </div>
   );

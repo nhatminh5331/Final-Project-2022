@@ -24,8 +24,10 @@ code {
 
 .App {
   width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(#e66465, #9198e5);
+  height: 100vh;
+  background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+  background-size: cover;
+  background-position: center;
 }
 
 .main {
@@ -36,3 +38,8 @@ code {
 
 /*----Auth CSS----*/
 @import url('./styles/auth.css');
+/*----Error CSS----*/
+@import url('./styles/error.css');
+/*----Home CSS----*/
+@import url('./styles/home.css');
+

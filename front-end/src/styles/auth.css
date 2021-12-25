@@ -4,21 +4,24 @@
     position: relative;
 }
 .auth_page form{
-    background: #fff;
-    border-radius: 32px;
+    background: #2d3436;
+    border-radius: 7px;
     max-width: 450px;
     width: 100%;
-    border: 1px solid #ddd;
-    padding: 55px 30px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 19px 32px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 30px;
 }
 .auth_page form h2{
-    background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 31px;
+    color: #fff;
+}
+.auth_page form input{
+    padding: 19px
 }
 .auth_page form .showpass{
     position: relative;
@@ -27,11 +30,38 @@
     position: absolute;
     font-weight: bold;
     cursor: pointer;
-    top: 25%;
+    top: 22%;
     right: 12px;
     opacity: 0.6;
 }
+.auth_page form label{
+    color: #cfcccc;
+}
+.auth_page form p{
+    color: #fff
+}
 .auth_page form button{
     border-radius: 10px;
+    background-color:#0077ff
+}
+.auth_page form .login small{
+    position: absolute;
+    cursor: pointer;
+    top: 73%;
+    right: 269px;
+}
+@media screen and (max-width: 768px){
+    .auth_page form{
+        max-width: 400px;
+        padding: 18px 34px;
+    }
+    .auth_page form h2{
+        font-size: 30px;
+    }
+    .auth_page form .login small{
+        position: absolute;
+        top: 73%;
+        right: 246px;
+    }
 }
 
