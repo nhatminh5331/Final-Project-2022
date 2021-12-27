@@ -1,6 +1,8 @@
 const Users = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const sendMail = require("./sendMail")
+const {CLIENT_URL} = process.env
 
 const authCtrl = {
   register: async (req, res) => {
@@ -35,6 +37,11 @@ const authCtrl = {
       const access_token = createAccessToken({ id: newUser._id });
       const refresh_token = createRefreshToken({ id: newUser._id });
 
+      const activation_token = createActivationToken(newUser)
+
+      const url = `${CLIENT_URL}/user_email/activate/${activation_token}`
+      sendMail(email, url)
+
       // Thiết lập Cookie
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
@@ -56,6 +63,28 @@ const authCtrl = {
       });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
+    }
+  },
+  activateEmail: async (req, res) => {
+    try {
+        const {activation_token} = req.body
+        const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
+
+        const {fullname, username, email, password} = user
+
+        const check = await Users.findOne({email})
+        if(check) return res.status(400).json({msg:"Email này đã tồn tại."})
+
+        const newUser = new Users({
+          fullname, username, email, password
+        })
+
+        await newUser.save()
+
+        res.json({msg: "Tài khoản đã được kích hoạt!"})
+
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
     }
   },
   login: async (req, res) => {
@@ -147,6 +176,10 @@ const createRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "412d",
   });
+};
+//Activation accessToken
+const createActivationToken = (payload) => {
+  return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: "5m"})
 };
 
 module.exports = authCtrl;
