@@ -45,6 +45,7 @@ const Login = () => {
                       { showPass ? <box-icon name='hide' type='solid' ></box-icon> : <box-icon name='show' type='solid' ></box-icon> }
                   </small>
               </div>
+              <Link to="/">Quên mật khẩu ?</Link>
             </div>
             
             <div className="login">

@@ -40,7 +40,7 @@ const authCtrl = {
       const activation_token = createActivationToken(newUser)
 
       const url = `${CLIENT_URL}/user_email/activate/${activation_token}`
-      sendMail(email, url)
+      sendMail(email, url, "Xác thực tài khoản")
 
       // Thiết lập Cookie
       res.cookie("refreshtoken", refresh_token, {
@@ -162,6 +162,23 @@ const authCtrl = {
       );
     } catch (error) {
       return res.status(500).json({ msg: error.message });
+    }
+  },
+  forgotPassword: async (req, res) => {
+    try {
+      const {email} = req.body
+      const user = await Users.findOne({email})
+      if(!user) 
+      return res.status(400).json({msg: "This email does not exist."})
+
+      const access_token = createAccessToken({id: user._id})
+      const url = `${CLIENT_URL}/user/reset/${access_token}`
+
+      sendMail(email, url, "Đặt lại mật khẩu")
+      
+      res.json({msg: "Kiểm tra email để đổi mật khẩu mới !"})
+    } catch (err) {
+      return res.status(500).json({msg: err.message})
     }
   },
 };

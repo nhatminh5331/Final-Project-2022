@@ -11,4 +11,6 @@ router.post("/logout", authCtrl.logout);
 
 router.post("/refresh_token", authCtrl.generateAccessToken);
 
+router.post("/forgot", authCtrl.forgotPassword);
+
 module.exports = router;
