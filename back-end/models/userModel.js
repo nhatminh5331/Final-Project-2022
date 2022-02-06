@@ -25,14 +25,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: Number,
+      default: 0 // admin = 1
+    },
     avatar: {
       type: String,
       default:
         "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
-    },
-    mobile: {
-      type: String,
-      default: "",
     },
     address: {
       type: String,

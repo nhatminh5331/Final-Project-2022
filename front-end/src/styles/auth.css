@@ -47,7 +47,7 @@
 .auth_page form .login small{
     position: absolute;
     cursor: pointer;
-    top: 74%;
+    top: 74.4%;
     right: 269px;
 }
 @media screen and (max-width: 768px){
@@ -60,8 +60,7 @@
     }
     .auth_page form .login small{
         position: absolute;
-        top: 73%;
-        right: 246px;
+        right: 243px;
     }
 }
 

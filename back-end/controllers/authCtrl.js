@@ -8,14 +8,15 @@ const authCtrl = {
   register: async (req, res) => {
     try {
       const { fullname, username, email, password } = req.body;
-      let newUserName = username.toLowerCase().replace(/ /g, "");
+
+      const newUserName = username.toLowerCase().replace(/ /g, "");
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)
-        return res.status(400).json({ msg: "Tên đăng nhập đã tồn tại" });
+        return res.status(400).json({ msg: "Tên người dùng đã tồn tại" });
 
-      const user_email = await Users.findOne({ email });
-      if (user_email)
+      const user = await Users.findOne({ email });
+      if (user)
         return res.status(400).json({ msg: "Email này đã tồn tại" });
 
       if (password.length < 6)
@@ -26,41 +27,17 @@ const authCtrl = {
       //Password encryption
       const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = new Users({
-        fullname,
-        username: newUserName,
-        email,
-        password: passwordHash,
-      });
-
-      //Create jsonwebtoken to authentication
-      const access_token = createAccessToken({ id: newUser._id });
-      const refresh_token = createRefreshToken({ id: newUser._id });
+      const newUser = {
+        fullname, username: newUserName, email, password: passwordHash
+      }
 
       const activation_token = createActivationToken(newUser)
 
-      const url = `${CLIENT_URL}/user_email/activate/${activation_token}`
+      const url = `${CLIENT_URL}/user/activate/${activation_token}`
       sendMail(email, url, "Xác thực tài khoản")
 
-      // Thiết lập Cookie
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/api/refresh_token",
-        maxAge: 412 * 24 * 60 * 60 * 1000, //412 days
-      });
-
-      //Save MongoDB
-      await newUser.save();
-
-      res.json({
-        msg: "Đăng ký thành công! Hãy kích hoạt tài khoản qua email.",
-        access_token,
-        user: {
-          //_doc để trả lại thông tin cần thiết người dùng
-          ...newUser._doc,
-          password: "",
-        },
-      });
+      res.json({msg: "Đăng ký thành công! Hãy kích hoạt tài khoản qua email."});
+      
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -73,15 +50,34 @@ const authCtrl = {
         const {fullname, username, email, password} = user
 
         const check = await Users.findOne({email})
-        if(check) return res.status(400).json({msg:"Email này đã tồn tại."})
+        if(check) 
+        return res.status(400).json({msg:"Email này đã tồn tại."})
 
         const newUser = new Users({
           fullname, username, email, password
         })
 
+        const access_token = createAccessToken({ id: user._id });
+        const refresh_token = createRefreshToken({ id: user._id });
+
+        // Thiết lập Cookie
+        res.cookie("refreshtoken", refresh_token, {
+          httpOnly: true,
+          path: "/api/refresh_token",
+          maxAge: 412 * 24 * 60 * 60 * 1000, //412 days
+        });
+
+        //Save MongoDB
         await newUser.save()
 
-        res.json({msg: "Tài khoản đã được kích hoạt!"})
+        res.json({msg: "Tài khoản kích hoạt thành công!",
+        access_token,
+        user: {
+          //_doc để trả lại thông tin cần thiết người dùng
+          ...user._doc,
+          password: "",
+        },
+      })
 
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -141,16 +137,15 @@ const authCtrl = {
       if (!rftoken)
         return res.status(400).json({ msg: "Xin hãy đăng nhập" });
       //Middleware làm mới accessToken
-      jwt.verify(
-        rftoken,
-        process.env.REFRESH_TOKEN_SECRET,
+      jwt.verify(rftoken,process.env.REFRESH_TOKEN_SECRET,
         async (err, result) => {
           if (err) return res.status(400).json({ msg: "Xin hãy đăng nhập" });
+
           //result = data of payload id,iat,exptime,...
           const user = await Users.findById(result.id)
             .select("-password")
             .populate("followers following", "-password");
-          if (!user) return res.status(400).json({ msg: "Không tồn tại" });
+          if (!user) return res.status(400).json({ msg: "Người dùng không tồn tại" });
 
           const access_token = createAccessToken({ id: result.id });
 
@@ -185,6 +180,7 @@ const authCtrl = {
     try {
       const {password} = req.body
       console.log(password)
+
       const passwordHash = await bcrypt.hash(password, 12)
 
       await Users.findOneAndUpdate({_id: req.user.id}, {
@@ -211,7 +207,9 @@ const createRefreshToken = (payload) => {
 };
 //Activation accessToken
 const createActivationToken = (payload) => {
-  return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: "5m"})
+  return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {
+    expiresIn: "15m",
+  });
 };
 
 module.exports = authCtrl;

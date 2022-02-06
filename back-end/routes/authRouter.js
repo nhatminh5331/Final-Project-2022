@@ -14,6 +14,6 @@ router.post("/refresh_token", authCtrl.generateAccessToken);
 
 router.post("/forgot", authCtrl.forgotPassword);
 
-router.post("/reset", auth, authCtrl.resetPassword);
+// router.post("/reset", auth, authCtrl.resetPassword);
 
 module.exports = router;

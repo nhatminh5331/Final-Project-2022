@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 const {google} = require('googleapis')
-const OAuth2 = google.auth
-const OATH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
+const {OAuth2} = google.auth;
+const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
 
 const {
     MAILING_SERVICE_CLIENT_ID,
@@ -14,7 +14,7 @@ const {
     MAILING_SERVICE_CLIENT_ID,
     MAILING_SERVICE_CLIENT_SECRET,
     MAILING_SERVICE_REFRESH_TOKEN,
-    OATH_PLAYGROUND
+    OAUTH_PLAYGROUND
  )
 
 //send mail
@@ -51,6 +51,7 @@ const sendEmail = (to, url, txt) => {
     
             <a href=${url} style="background: darkslategray; text-decoration: none; color: white;  padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
 
+            <div>${url}</div>
         </div>
         `
     }
