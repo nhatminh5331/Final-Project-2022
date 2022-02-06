@@ -6,6 +6,7 @@ import Error from "./pages/error";
 import Home from "./pages/home";
 import ActivationEmail from "./pages/activationEmail"
 import Notify from "./components/notify/Notify";
+import ForgotPassword from "./pages/forgotPassword";
 import {useSelector, useDispatch} from "react-redux"
 import {refreshToken} from "./redux/actions/authAction"
 
@@ -26,6 +27,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={authReducer.token ? Home : Login} />
             <Route path="/register" component={Register} />
+            <Route path="/forgotpassword" component={ForgotPassword} />
             <Route path="/user/activate/:activation_token" component={ActivationEmail} />
             <Route path="/:error" component={Error} />
           </Switch>
