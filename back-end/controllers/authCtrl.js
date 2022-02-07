@@ -33,7 +33,7 @@ const authCtrl = {
 
       const activation_token = createActivationToken(newUser)
 
-      const url = `${CLIENT_URL}/user/activate/${activation_token}`
+      const url = `${CLIENT_URL}/api/activate/${activation_token}`
       sendMail(email, url, "Xác thực tài khoản")
 
       res.json({msg: "Đăng ký thành công! Hãy kích hoạt tài khoản qua email."});
@@ -167,7 +167,7 @@ const authCtrl = {
       return res.status(400).json({msg: "Email này không tồn tại"})
 
       const access_token = createAccessToken({id: user._id})
-      const url = `${CLIENT_URL}/user/reset/${access_token}`
+      const url = `${CLIENT_URL}/api/reset/${access_token}`
 
       sendMail(email, url, "Đặt lại mật khẩu")
 

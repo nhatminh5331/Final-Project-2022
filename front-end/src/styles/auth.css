@@ -97,4 +97,36 @@
     border-radius: 10px;
     background-color:#0077ff
 }
-
+/*--------------------Reset password CSS----------------------*/
+.reset_pw{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+.reset_pw form{
+    background: #2d3436;
+    border-radius: 7px;
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 19px 33px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 30px;
+}
+.reset_pw form h2{
+    font-size: 35px;
+    color: #fff;
+}
+.reset_pw form label{
+    color: #fff;
+}
+.reset_pw form input{
+    padding: 19px
+}
+.reset_pw form button{
+    border-radius: 10px;
+    background-color:#0077ff
+}

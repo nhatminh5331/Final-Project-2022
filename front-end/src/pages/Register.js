@@ -97,7 +97,7 @@ const Register = () => {
 
               <small className="form-text text-danger">
                     {notifyReducer.confirmpassword ? notifyReducer.confirmpassword : ''}
-               </small>
+              </small>
             </div>
 
             <button type="submit" className="btn btn-dark w-100 pt-3 pb-3 font-weight-bold" >
