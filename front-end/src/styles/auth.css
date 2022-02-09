@@ -3,6 +3,9 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+    background-size: cover;
+    background-position: center;
 }
 .auth_page form{
     background: #2d3436;
@@ -69,6 +72,9 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+    background-size: cover;
+    background-position: center;
 }
 .forgot_pw form{
     background: #2d3436;
@@ -102,6 +108,9 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+    background-size: cover;
+    background-position: center;
 }
 .reset_pw form{
     background: #2d3436;
@@ -129,4 +138,33 @@
 .reset_pw form button{
     border-radius: 10px;
     background-color:#0077ff
+}
+/*--------------------Active account CSS----------------------*/
+.active_page{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+    background-size: cover;
+    background-position: center;
+}
+.active_page form{
+    background: #2d3436;
+    border-radius: 7px;
+    max-width: 710px;
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 19px 32px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 30px;
+}
+.active_page form h2{
+    color: #fff;
+}
+.active_page form h3{
+    font-size: 27px;
+    color: #fff;
 }

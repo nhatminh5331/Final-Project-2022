@@ -1,6 +1,9 @@
 .error_form{
     position: relative;
     min-height: 100vh;
+    background-image: url(https://preview.redd.it/oe901qo4hth61.png?width=3840&format=png&auto=webp&s=eac9b8f429cf2d88a84ed865b6ee5493ff452dcb);
+    background-size: cover;
+    background-position: center;
 }
 .error_form h1{
     font-weight: bold;

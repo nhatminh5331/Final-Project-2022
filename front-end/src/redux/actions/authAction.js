@@ -2,7 +2,6 @@ import {GLOBALTYPES} from './globalTypes'
 import {postDataAPI} from '../../utils/fetchData'
 import valid from '../../utils/valid'
 
-
 export const login = (data) => async (dispatch) => {
     try {
         dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true} })
@@ -95,6 +94,30 @@ export const register = (data) => async (dispatch) => {
         })
     }
 }
+
+export const forgotPassword = (data) => async (dispatch) => {
+
+    try {
+        dispatch({type: GLOBALTYPES.NOTIFY, payload: {loading: true}})
+        const res = await postDataAPI('forgot', data)
+
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                success: res.data.msg
+            } 
+        })
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
+
+
 
 
 

@@ -21,8 +21,6 @@ const ResetPassword = () => {
             const res = await axios.post('/api/reset', {password}, {
                 headers: {Authorization: token}
             })
-            // Không thể sử dụng postDataAPI
-
             return setData({...data, res})
 
         } catch (err) {
@@ -33,7 +31,7 @@ const ResetPassword = () => {
 
   return (
         <div className="reset_pw">
-            <form>
+            <form onSubmit={handleResetPass}>
                 <h2 className="text-uppercase text-center mb-2 font-weight-bold">Thay đổi mật khẩu</h2>
 
             <div className="form-group mb-4 font-weight-bold">
@@ -48,7 +46,7 @@ const ResetPassword = () => {
                  value={confirmpassword} onChange={handleChangeInput} />
             </div>
 
-                <button onClick={handleResetPass} className="btn btn-dark w-100 pt-3 pb-3 mb-3 font-weight-bold" >
+                <button type="submit" className="btn btn-dark w-100 pt-3 pb-3 mb-3 font-weight-bold" >
                     Xác nhận
                 </button> 
             

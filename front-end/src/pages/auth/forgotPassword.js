@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {postDataAPI}from '../utils/fetchData'
+import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
+import {forgotPassword} from "../../redux/actions/authAction"
 
 const ForgotPassword = () => {
+
+    const dispatch = useDispatch()
 
     const initialState = {email: ''}
     const [data, setData] = useState(initialState)
@@ -13,21 +16,14 @@ const ForgotPassword = () => {
         setData({...data, [name]:value})
     }
 
-    const forgotPassword = async () => {
-            
-        try {
-            const res = await postDataAPI('forgot', {email})
-
-            return setData({...data, res})
-
-        } catch (err) {
-            return err
-        }
+    const forgotSubmit = (event) => {
+        event.preventDefault();
+        dispatch(forgotPassword(data))
     }
 
   return (
     <div className="forgot_pw">
-        <form>
+        <form onSubmit={forgotSubmit}>
         <h2 className="text-uppercase text-center mb-4 font-weight-bold">Quên mật khẩu ?</h2>
 
         <div className="form-group mb-5 font-weight-bold">
@@ -40,8 +36,8 @@ const ForgotPassword = () => {
             </p>
         </div>
 
-        <button onClick={forgotPassword} className="btn btn-dark w-100 pt-3 pb-3 font-weight-bold" >
-            Xác nhận email 
+        <button type="submit" className="btn btn-dark w-100 pt-3 pb-3 font-weight-bold" >
+            Xác nhận
         </button> 
         
         </form>
@@ -49,4 +45,4 @@ const ForgotPassword = () => {
     )
 };
 
-export default ForgotPassword;
+export default ForgotPassword
