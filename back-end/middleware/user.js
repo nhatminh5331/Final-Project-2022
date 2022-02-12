@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const user = (req, res, next) => {
+const User = (req, res, next) => {
     try {
         const token = req.header("Authorization")
         if(!token) return res.status(400).json({msg: "Xác thực không hợp lệ."})
@@ -16,4 +16,4 @@ const user = (req, res, next) => {
     }
 }
 
-module.exports = user
+module.exports = User

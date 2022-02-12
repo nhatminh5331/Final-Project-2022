@@ -25,7 +25,7 @@ const Login = () => {
     //Bootstrap 4.5 form
     <div className="auth_page">
         <form onSubmit={handleSubmit}>
-            <h2 className="text-uppercase text-center mb-2 font-weight-bold">Novarea</h2>
+            <h2 className="text-uppercase text-center mb-2 font-weight-bold">Gamemortal</h2>
             <p className="text-center mb-2">
               Kết nối những đam mê !
             </p>

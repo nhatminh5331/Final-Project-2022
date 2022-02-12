@@ -3,14 +3,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const fileUpload = require('express-fileupload')
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+app.use(fileUpload({
+  useTempFiles: true
+}));
 
 //Routes
-app.use("/api", require("./routes/authRouter"));
+app.use('/api', require("./routes/authRouter"));
+app.use('/api', require("./routes/categoryRouter"))
+app.use('/api', require("./routes/postRouter"))
+app.use('/api', require("./routes/uploadRouter"))
 
 //Connect to MongoDB
 const URL = process.env.MONGODB_URL;
