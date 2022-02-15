@@ -1,6 +1,46 @@
 const Posts = require('../models/postModel')
 
+//Lọc danh mục, loại, phân trang
+
 const postCtrl = {
+    getPost: async(req, res) =>{
+        try {
+
+            //Filtering
+            const queryObj = { ...req.query } 
+            const excludedFields = ['page', 'sort', 'limit']
+            excludedFields.forEach(el => delete queryObj[el])
+
+            let queryString = JSON.stringify(queryObj)
+            queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
+            let query = Posts.find(JSON.parse(queryString)) 
+
+            // Sorting
+            if (req.query.sort) {
+                const sortPost = req.query.sort.split(',').join(' ')
+                query = query.sort(sortPost)
+              } else {
+                query = query.sort('-createdAt')
+              }
+              
+            //Pagination
+            const page = req.query.page * 1 || 1
+            const limit = req.query.limit * 1 || 6
+            const skip = (page - 1) * limit;
+            query = query.skip(skip).limit(limit);
+
+
+            const posts = await query
+            res.json({
+                status: 'success',
+                result: posts.length,
+                data: posts
+            })
+           
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
     createPost: async(req, res) =>{
         try {
             const {post_id, title, information, content, images, category} = req.body;
@@ -8,7 +48,7 @@ const postCtrl = {
 
             const post = await Posts.findOne({post_id})
             if(post)
-                return res.status(400).json({msg: "Bài viết đã tồn tại"})
+            return res.status(400).json({msg: "Bài viết đã tồn tại"})
 
             const newPost = new Posts({
                 post_id, title: title.toLowerCase(), information, content, images, category

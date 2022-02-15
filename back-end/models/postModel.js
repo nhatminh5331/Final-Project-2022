@@ -42,7 +42,7 @@ const postSchema = new mongoose.Schema({
         ref: 'user'
     }
 }, {
-    timestamps: true 
+    timestamps: true //For sorting feature
 })
 
 

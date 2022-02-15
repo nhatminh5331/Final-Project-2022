@@ -5,7 +5,7 @@ const Admin = require('../middleware/admin')
 
 router.route('/post')
     .get(postCtrl.getPost)
-    .post(User, Admin, postCtrl.createPost)
+    .post( postCtrl.createPost)
 
 router.route('/post/:id')
     .delete(User, Admin, postCtrl.deletePost)
