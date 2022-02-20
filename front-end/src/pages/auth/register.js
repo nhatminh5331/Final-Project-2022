@@ -1,21 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {useHistory, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { register } from '../../redux/actions/authAction'
 
 const Register = () => {
-    const {authReducer, notifyReducer} = useSelector(state => state)
-    const history = useHistory()
+    const {notifyReducer} = useSelector(state => state)
     const dispatch = useDispatch()
 
     const [userInput, setUserInput] = useState({ fullname: "",username: "", email: "", password: "", confirmpassword: "" });
     const { fullname, username, email, password, confirmpassword } = userInput;
     const [showPass, setShowPass] = useState(false)
     const [showConfirmPass, setShowConfirmPass] = useState(false)
-
-    useEffect(() => {
-        if(authReducer.token) history.push("/")
-    },[authReducer.token, history])
 
     const handleChangeInput = (event) => {
       setUserInput({...userInput, [event.target.name]: event.target.value})
@@ -27,7 +22,6 @@ const Register = () => {
 }
 
     return (
-    //Bootstrap 4.5 form
     <div className="auth_page">
         <form onSubmit={handleSubmit}>
             <h2 className="text-uppercase text-center font-weight-bold">Đăng ký</h2>

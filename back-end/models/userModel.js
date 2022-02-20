@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default:
-        "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
+        "https://res.cloudinary.com/gamemortal/image/upload/v1644678801/gameMortal/rk4irg6iwosi5rdbdiyb.jpg",
     },
     address: {
       type: String,
@@ -43,18 +43,6 @@ const userSchema = new mongoose.Schema(
       default: "",
       maxlength: 140,
     },
-    followers: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "user",
-      },
-    ],
-    following: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "user",
-      },
-    ],
   },
   {
     timestamps: true,

@@ -95,6 +95,21 @@ export const register = (data) => async (dispatch) => {
     }
 }
 
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.removeItem('firstLogin')
+        await postDataAPI('logout')
+        window.location.href = "/"
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
+
 export const forgotPassword = (data) => async (dispatch) => {
 
     try {

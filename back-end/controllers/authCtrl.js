@@ -192,6 +192,16 @@ const authCtrl = {
       return res.status(500).json({msg: err.message})
     }
   },
+  getUser: async (req, res) => {
+    try {
+        const user = await Users.findById(req.params.id).select('-password')
+        if(!user) return res.status(400).json({msg: "Người dùng không tồn tại !"})
+
+        res.json({user})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+  },
 };
 //Access Token
 const createAccessToken = (payload) => {

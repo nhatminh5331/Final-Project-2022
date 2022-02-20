@@ -5,7 +5,6 @@ const Posts = require('../models/postModel')
 const postCtrl = {
     getPost: async(req, res) =>{
         try {
-
             //Filtering
             const queryObj = { ...req.query } 
             const excludedFields = ['page', 'sort', 'limit']
