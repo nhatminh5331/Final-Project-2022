@@ -15,7 +15,7 @@ code {
 }
 
 .App {
-  max-width: 100%;
+  max-width: 95%;
   min-height: 100vh;
   margin: 0 auto;
 }
@@ -25,11 +25,10 @@ code {
   margin: auto;
 }
 
+
 /*---------------Auth CSS---------------*/
 @import url('./styles/auth.css');
 /*---------------Error CSS---------------*/
 @import url('./styles/error.css');
 /*---------------Home CSS---------------*/
 @import url('./styles/home.css');
-/*---------------Avatar CSS---------------*/
-@import url('./styles/avatar.css');

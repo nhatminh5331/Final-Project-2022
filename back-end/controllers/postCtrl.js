@@ -24,7 +24,7 @@ const postCtrl = {
               
             //Pagination
             const page = req.query.page * 1 || 1
-            const limit = req.query.limit * 1 || 6
+            const limit = req.query.limit * 1 || 9
             const skip = (page - 1) * limit;
             query = query.skip(skip).limit(limit);
 
@@ -33,7 +33,7 @@ const postCtrl = {
             res.json({
                 status: 'success',
                 result: posts.length,
-                data: posts
+                posts
             })
            
         } catch (err) {
@@ -50,7 +50,7 @@ const postCtrl = {
             return res.status(400).json({msg: "Bài viết đã tồn tại"})
 
             const newPost = new Posts({
-                post_id, title: title.toLowerCase(), information, content, images, category
+                post_id, title, information, content, images, category
             })
 
             await newPost.save()
@@ -74,7 +74,7 @@ const postCtrl = {
             if(!images) return res.status(400).json({msg: "Không có hình ảnh để cập nhật"})
 
             await Posts.findOneAndUpdate({_id: req.params.id}, {
-                title: title.toLowerCase(), information, content, images, category
+                title, information, content, images, category
             })
 
             res.json({msg: "Đã cập nhật bài viết"})

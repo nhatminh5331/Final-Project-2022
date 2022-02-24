@@ -11,6 +11,7 @@ import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./components/notfound";
 import {useSelector, useDispatch} from "react-redux"
 import {refreshToken} from "./redux/actions/authAction"
+import { getPosts } from './redux/actions/postAction';
 
 function App() {
   const {authReducer} = useSelector(state => state)
@@ -19,6 +20,10 @@ function App() {
   useEffect(() => {
       dispatch(refreshToken())
   },[dispatch])
+
+  useEffect(() => {
+		dispatch(getPosts());
+	}, [dispatch]);
 
   return (
     <Router>

@@ -4,7 +4,7 @@ import valid from '../../utils/valid'
 
 export const login = (data) => async (dispatch) => {
     try {
-        dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true} })
+        dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true}})
         const res = await postDataAPI('login', data);
         dispatch({ 
             type: GLOBALTYPES.AUTH, 

@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default:
-        "https://res.cloudinary.com/gamemortal/image/upload/v1644678801/gameMortal/rk4irg6iwosi5rdbdiyb.jpg",
+        "https://res.cloudinary.com/gamemortal/image/upload/v1644678679/gameMortal/iq4g1n4gy8knrqvi6bgt.jpg",
     },
     address: {
       type: String,

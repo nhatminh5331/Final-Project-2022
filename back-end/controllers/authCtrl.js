@@ -9,7 +9,7 @@ const authCtrl = {
     try {
       const { fullname, username, email, password } = req.body;
 
-      const newUserName = username.toLowerCase().replace(/ /g, "");
+      const newUserName = username.replace(/ /g, "");
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)

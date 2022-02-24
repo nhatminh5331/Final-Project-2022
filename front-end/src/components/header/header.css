@@ -7,8 +7,8 @@ li {
   height: 6rem;
   display: grid;
   grid-template-columns: 9rem 1fr 2fr 1fr 9rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 100px -50px,
-rgba(0, 0, 0, 0.3) 0px 20px 60px -24px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 100px -90px,
+rgba(0, 0, 0, 0.3) 0px 20px 20px -24px;
 }
 
 .logo {
@@ -56,7 +56,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 60px -24px;
 
 /* ----------- Grid part ends ----------------- */
 
-.logo h2 {
+.logo  {
   font-size: 1.6rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -65,7 +65,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 60px -24px;
   -webkit-text-fill-color: transparent;
 }
 
-.logo h2 span {
+.logo span {
   font-size: 2.4rem;
 }
 
@@ -212,6 +212,10 @@ rgba(0, 0, 0, 0.3) 0px 20px 60px -24px;
     display: block;
     font-size: 2.5rem;
   }
+
+  .user-profile .hello {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {
@@ -239,10 +243,6 @@ rgba(0, 0, 0, 0.3) 0px 20px 60px -24px;
   .user-profile .hamburger-menu {
     display: block;
     font-size: 2.5rem;
-  }
-
-  .user-profile .hello {
-    display: none;
   }
 
 }

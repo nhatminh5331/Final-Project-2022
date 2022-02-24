@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./header.css"
+import "./avatar.css"
 import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/authAction'
@@ -7,39 +8,39 @@ import { GiHamburgerMenu } from "react-icons/gi"
 
 const Header = () => {
 
-  const [showMediaIcons, setShowMediaIcons] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const {authReducer} = useSelector(state => state)
+  console.log(authReducer)
   const dispatch = useDispatch()
 
   return (
       <nav className="main-nav">
         <div className="logo">
-          <h2>
+          <Link to='/'>
             <span>G</span>ame
             <span>M</span>ortal
-          </h2>
+          </Link>
         </div>
 
         <div
           className={
-            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+            showMenu ? "menu-link mobile-menu-link" : "menu-link"
           }>
           <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/category">Category</Link>
+              <Link to="/post">Post</Link>
             </li>
             <li>
-              <Link to="/create">Create</Link>
+              <Link to="/chat">Chat</Link>
             </li>
             <li>
               <Link to="/about">About</Link>
             </li>
           </ul>
         </div>
-
 
         <div className="user-profile">
             <li className="nav-item dropdown">
@@ -58,7 +59,7 @@ const Header = () => {
             </li>
 
           <div className="hamburger-menu">
-            <Link href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+            <Link href="#" onClick={() => setShowMenu(!showMenu)}>
               <GiHamburgerMenu />
             </Link>
           </div>

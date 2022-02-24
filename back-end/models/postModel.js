@@ -8,6 +8,7 @@ const postSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    // user: {type: mongoose.Types.ObjectId, ref: 'User'},
     title:{
         type: String,
         trim: true,
@@ -26,7 +27,7 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     category:{
-        type: String,
+        type: [String],
         required: true
     }
 }, {

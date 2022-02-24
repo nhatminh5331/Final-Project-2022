@@ -13,7 +13,7 @@ cloudinary.config({
 })
 
 //Only admin can upload img on post
-router.post('/upload',User, Admin, (req, res) =>{
+router.post('/upload', (req, res) =>{
     try {
         if(!req.files || Object.keys(req.files).length === 0)
             return res.status(400).json({msg: 'Không có ảnh để upload.'})
