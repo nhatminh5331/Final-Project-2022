@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     story: {
       type: String,
       default: "",
-      maxlength: 140,
+      maxlength: 150,
     },
   },
   {

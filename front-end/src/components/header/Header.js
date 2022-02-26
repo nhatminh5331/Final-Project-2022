@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./header.css"
-import "./avatar.css"
+import "../../styles/avatar.css"
 import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/authAction'
@@ -10,7 +10,7 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = useState(false);
   const {authReducer} = useSelector(state => state)
-  console.log(authReducer)
+  
   const dispatch = useDispatch()
 
   return (

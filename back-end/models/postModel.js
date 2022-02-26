@@ -8,7 +8,6 @@ const postSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    // user: {type: mongoose.Types.ObjectId, ref: 'User'},
     title:{
         type: String,
         trim: true,
@@ -29,7 +28,11 @@ const postSchema = new mongoose.Schema({
     category:{
         type: [String],
         required: true
-    }
+    },
+    user: {
+        type: mongoose.Types.ObjectId, 
+        ref: 'User'
+    },
 }, {
     timestamps: true //For sorting feature
 })

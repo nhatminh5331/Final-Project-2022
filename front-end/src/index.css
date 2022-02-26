@@ -32,3 +32,7 @@ code {
 @import url('./styles/error.css');
 /*---------------Home CSS---------------*/
 @import url('./styles/home.css');
+/*---------------Avatar CSS---------------*/
+@import url('./styles/avatar.css');
+/*---------------Profile CSS---------------*/
+@import url('./styles/profile.css');
