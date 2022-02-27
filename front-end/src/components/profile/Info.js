@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getProfileUsers } from '../../redux/actions/profileAction'
 import EditProfile from './EditProfile'
@@ -13,7 +13,7 @@ const Info = () => {
     const [onEdit, setOnEdit] = useState(false)
 
     useEffect(() => {
-        if(id === authReducer.userCurrent?._id){ //.id or ._id
+        if(id === authReducer.userCurrent?._id){ 
             setUserData([authReducer.userCurrent])
          }else{
            dispatch(getProfileUsers({users: profileReducer.users, id, authReducer}))
@@ -37,7 +37,7 @@ const Info = () => {
                           user._id === authReducer.userCurrent._id
                           ? <button className="btn btn-outline-info"
                           onClick={() => setOnEdit(true)}>
-                            Cập nhật profile
+                            Update 
                           </button>
 
                           : <button className="d-none"></button>
@@ -49,7 +49,7 @@ const Info = () => {
 
                     <h5>{user.fullname}</h5>
                     <p>{user.address}</p>
-                    <h5>{user.email}</h5>
+                    <Link to={user.email} target="_blank">{user.email}</Link>
                     <p>{user.story}</p>
     
                 </div>

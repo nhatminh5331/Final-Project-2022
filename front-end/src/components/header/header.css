@@ -16,7 +16,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -24px;
   grid-column: 2/3;
   justify-content: start;
   align-items: center;
-  height: 6rem
+  height: 5rem
 }
 
 .menu-link {
@@ -99,6 +99,29 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -24px;
   font-size: 1.2rem;
 }
 
+@media (max-width: 1270px) {
+  .user-profile .hello {
+    font-size: 1rem;
+  }
+  .menu-link ul li {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1155px) {
+  .user-profile .hello {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1097px) {
+  .user-profile .hello {
+    font-size: 0.8rem;
+  }
+  .menu-link ul li {
+    font-size: 1.1rem;
+  }
+}
 
 /* responsive css style  */
 @media (max-width: 1080px) {

@@ -1,5 +1,7 @@
 import { GLOBALTYPES } from './globalTypes'
 import { getDataAPI } from '../../utils/fetchData'
+import { patchDataAPI } from '../../utils/fetchData'
+import {uploadImage} from '../../utils/uploadImage'
 
 export const PROFILE_TYPES = {
     LOADING: 'LOADING_PROFILE',
@@ -30,5 +32,49 @@ export const getProfileUsers = ({users, id, authReducer}) => async (dispatch) =>
                 }
             })
         }
+    }
+}
+
+
+export const updateProfileUser = ({userData, avatar, authReducer}) => async (dispatch) => {
+    if(!userData.fullname)
+    return dispatch({type: GLOBALTYPES.NOTIFY, payload: {error: "Please add your full name."}})
+
+    if(userData.username.length > 12)
+    return dispatch({type: GLOBALTYPES.NOTIFY, payload: {error: "Your username too long."}})
+
+    if(userData.story.length > 150)
+    return dispatch({type: GLOBALTYPES.NOTIFY, payload: {error: "Your story too long."}})
+
+    try {
+        let media; 
+
+        if(avatar) media = await uploadImage([avatar])
+
+        const res = await patchDataAPI("user", {
+            ...userData,
+            avatar: avatar ? media[0].url : authReducer.userCurrent.avatar
+        }, authReducer.token)
+
+        dispatch({
+            type: GLOBALTYPES.AUTH,
+            payload: {
+                ...authReducer,
+                user: {
+                    ...authReducer.userCurrent,
+                    ...userData,
+                    avatar: avatar ? media[0].url : authReducer.userCurrent.avatar,
+                }
+            }
+        })
+
+        dispatch({type: GLOBALTYPES.NOTIFY, payload: {success: res.data.msg}})
+    } catch (err) {
+        dispatch({
+                type: GLOBALTYPES.NOTIFY, 
+                payload: {
+                    error: err.response.data.msg
+                }
+            })
     }
 }

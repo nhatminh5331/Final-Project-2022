@@ -16,6 +16,4 @@ router.post("/forgot", authCtrl.forgotPassword);
 
 router.post("/reset", user, authCtrl.resetPassword);
 
-router.get("/user/:id", user, authCtrl.getUser);
-
 module.exports = router;

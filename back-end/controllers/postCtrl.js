@@ -1,7 +1,5 @@
 const Posts = require('../models/postModel')
 
-//Lọc danh mục, loại, phân trang
-
 const postCtrl = {
     getPost: async(req, res) =>{
         try {

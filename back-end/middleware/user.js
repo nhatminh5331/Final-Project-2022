@@ -1,16 +1,19 @@
+const Users = require("../models/userModel")
 const jwt = require('jsonwebtoken')
 
-const User = (req, res, next) => {
+const User = async (req, res, next) => {
     try {
         const token = req.header("Authorization")
-        if(!token) return res.status(400).json({msg: "Xác thực không hợp lệ."})
+        
+        if(!token) return res.status(400).json({msg: "Invalid Authentication."})
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if(err) return res.status(400).json({msg: "Xác thực không hợp lệ."})
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        if(!decoded) return res.status(400).json({msg: "Invalid Authentication."})
 
-            req.user = user
-            next()
-        })
+        const user = await Users.findOne({_id: decoded.id})
+        
+        req.user = user
+        next()
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
