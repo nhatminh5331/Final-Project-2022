@@ -44,18 +44,26 @@
     overflow: auto;
 }
 .editProfile form{
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
     background: #fff;
     padding: 26px;
     border-radius: 15px;
-    margin: 32px auto
+    margin: 27px auto
 }
-.editProfile .btn_close{
-    position: absolute;
-    top: 2rem;
-    right: 4rem;
+
+.editProfile .edit_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -20px;
 }
+
+.editProfile .edit_header span{
+    font-size: 2rem;
+    cursor: pointer;
+}
+
 .editProfile .info_avatar{
     width: 150px;
     height: 150px;

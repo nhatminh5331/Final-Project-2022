@@ -44,12 +44,17 @@ const EditProfile = ({setOnEdit}) => {
 
   return (
     <div className="editProfile">
-        <button className="btn btn-danger btn_close"
-        onClick={() => setOnEdit(false)}>
-            Close
-        </button>
-
         <form onSubmit={handleSubmit}>
+
+            <div className="edit_header">
+
+                <h5 className="m-0">Edit user</h5>
+
+                <span onClick={() => setOnEdit(false)}>
+                    &times;
+                </span>
+            </div>
+
             <div className="info_avatar">
                 <img  src={avatar ? URL.createObjectURL(avatar) : authReducer.userCurrent.avatar} alt="avatar"/>
 

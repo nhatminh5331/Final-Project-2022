@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import 'boxicons'
 import { Link } from "react-router-dom";
 import { login } from '../../redux/actions/authAction'
 import { useDispatch } from "react-redux";
+import 'boxicons'
 
 
 const Login = () => {

@@ -40,7 +40,7 @@ const Info = () => {
                             Update 
                           </button>
 
-                          : <button className="d-none"></button>
+                          : <button className="d-none">Hidden button</button>
                           
                         }
               

@@ -2,24 +2,19 @@ const mongoose = require('mongoose')
 
 
 const commentSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true
-    },
     content: {
         type: String,
-        required: true   
-    },
-    post_id:{
-        type: String,
         required: true
     },
-    reply: {
-        type: Array,
-    }
+    user: {
+        type: mongoose.Types.ObjectId, 
+        ref: 'user'
+    },
+    postId: mongoose.Types.ObjectId,
+    postUserId: mongoose.Types.ObjectId
 }, {
     timestamps: true
 })
 
 
-module.exports = mongoose.model('Comments', commentSchema)
+module.exports = mongoose.model('comment', commentSchema)

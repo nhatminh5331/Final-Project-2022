@@ -3,11 +3,11 @@ const postCtrl = require('../controllers/postCtrl')
 const User = require('../middleware/user')
 
 router.route('/posts')
+    .post(User, postCtrl.createPost)    
     .get(postCtrl.getPost)
-    .post(User, postCtrl.createPost)
 
-router.route('/post/:id')
-    .delete(User, postCtrl.deletePost)
-    .patch(User, postCtrl.updatePost)
+// router.route('/post/:id')
+//     .delete(User, postCtrl.deletePost)
+//     .patch(User, postCtrl.updatePost)
 
 module.exports = router

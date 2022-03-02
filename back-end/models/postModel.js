@@ -1,41 +1,41 @@
 const mongoose = require('mongoose')
 
-
-const postSchema = new mongoose.Schema({
-    post_id:{
-        type: String,
-        unique: true,
-        trim: true,
-        required: true
-    },
+const postSchema = new mongoose.Schema(
+    {
     title:{
         type: String,
-        trim: true,
-        required: true
+        required: true,
+        maxlength: 30,
     },
     information:{
         type: String,
-        required: true
+        required: true,
     },
     content:{
         type: String,
-        required: true
+        required: true,
     },
     images:{
         type: Object,
         required: true
     },
     category:{
-        type: [String],
-        required: true
+        type: String,
+        required: true,
     },
+    comments: [{ 
+        type: mongoose.Types.ObjectId, 
+        ref: 'comment' 
+    }],
     user: {
         type: mongoose.Types.ObjectId, 
-        ref: 'User'
+        ref: 'user'
     },
-}, {
-    timestamps: true //For sorting feature
-})
+  }, 
+    {
+    timestamps: true 
+    }
+);
 
 
-module.exports = mongoose.model("Posts", postSchema)
+module.exports = mongoose.model("post", postSchema)

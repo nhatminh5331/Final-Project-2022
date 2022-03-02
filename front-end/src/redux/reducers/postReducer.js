@@ -1,6 +1,7 @@
 import { POST_TYPES } from '../actions/postAction'
 
 const initialState = {
+    loading: false,
     posts: []
 }
 

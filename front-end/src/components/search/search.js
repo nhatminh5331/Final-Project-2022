@@ -1,5 +1,5 @@
 import React from 'react';
-import './search.css';
+import './Search.css';
 
 const SearchBar = () => (
   <div className='searchBar-wrap'>

@@ -1,24 +1,46 @@
 .home-header {
     text-align: center;
-  }
+}
   
-  .home-header h2 {
+.home-header h2 {
     color: #0080ff;
     font-size: 2.5rem;
     margin-top: 25px;
-  }
+}
   
-  .home-header h1 {
+.home-header h1 {
     font-size: 3rem;
     color: #0f52ba;
     margin-bottom: 1rem;
-  }
+}
   
-  .home-header h1 span {
+.home-header h1 span {
     color: #b0c4de;
-  }
+}
   
-  .home-header p {
+.home-header p {
     color: #a9a9a9;
     font-weight: 500;
-  }
+}
+/* ------------------Create new post------------------ */
+.status{
+  background: white;
+  box-shadow: 0 0 5px #ddd;
+  width: fit-content;
+  margin: 2.5rem auto 4rem auto;
+  padding: 12px;
+  border-radius: 10px;
+}
+.status .statusBtn{
+  background: #f1f1f1;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  color: #555;
+  padding: 12px 80px;
+  margin: 0 12px;
+}
+.status .statusBtn:hover{
+  background: #ddd
+}
+

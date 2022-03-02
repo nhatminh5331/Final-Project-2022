@@ -9,13 +9,14 @@ import Header from "./components/header/Header";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./components/notfound";
-import Profile from "./pages/profile/[id]";
+import Profile from "./pages/profile/IdUser";
 import {useSelector, useDispatch} from "react-redux"
 import {refreshToken} from "./redux/actions/authAction"
 import { getPosts } from './redux/actions/postAction';
+import CreatePost from "./components/newPost/newPost"
 
 function App() {
-  const {authReducer} = useSelector(state => state)
+  const {authReducer, statusReducer} = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -28,8 +29,12 @@ function App() {
 
   return (
     <Router>
+
       <Notify />
+
       {authReducer.token && <Header />}
+      {statusReducer && <CreatePost />}
+
       <div className="App">
         <div className="main">
           <Switch>

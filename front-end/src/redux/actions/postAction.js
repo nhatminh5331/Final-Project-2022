@@ -1,21 +1,26 @@
 import {GLOBALTYPES} from './globalTypes'
+import {uploadImage} from '../../utils/uploadImage'
 import {getDataAPI} from '../../utils/fetchData'
 import {postDataAPI} from '../../utils/fetchData'
-// import {patchDataAPI} from '../../utils/fetchData'
-// import {deleteDataAPI} from '../../utils/fetchData'
+import {patchDataAPI} from '../../utils/fetchData'
+import {deleteDataAPI} from '../../utils/fetchData'
 
 export const POST_TYPES = {
-    GET_POSTS: "GET_POSTS",
     CREATE_POST: "CREATE_POST",
+    GET_POSTS: "GET_POSTS",
     UPDATE_POST: "UPDATE_POST",
     DELETE_POST: "DELETE_POST",
     GET_POST: "GET_POST",
 }
 
-export const createPost = (data) => async (dispatch) => {
+export const createPost = ({postData, images, authReducer}) => async (dispatch) => {
+
+    let media = []
     try {
         dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true}})
-        const res = await postDataAPI('posts', data);
+        if(images.length > 0) media = await uploadImage(images)
+
+        const res = await postDataAPI('posts', {...postData, images: media}, authReducer.token)
         dispatch({ 
             type: GLOBALTYPES.NOTIFY, 
             payload: {
@@ -36,6 +41,7 @@ export const createPost = (data) => async (dispatch) => {
         })
     }
 }
+
 export const getPosts = () => async (dispatch) => {
     try {
         const res = await getDataAPI('posts');
@@ -52,6 +58,7 @@ export const getPosts = () => async (dispatch) => {
         })
     }
 }
+
 // export const updatePost = (data) => async (dispatch) => {
 //     try {
 //         dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true}})
