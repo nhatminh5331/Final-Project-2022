@@ -14,7 +14,7 @@ const Introduce = () => {
         <img src={authReducer.userCurrent.avatar} alt="avatar" className="small-avatar" />
           <button className='statusBtn'
           onClick={() => dispatch({type: GLOBALTYPES.STATUS, payload: true})}>
-              {authReducer.userCurrent.username}, what's game today ?
+              What's new today ?
           </button>
         </div>
 

@@ -1,9 +1,6 @@
 import {GLOBALTYPES} from './globalTypes'
 import {uploadImage} from '../../utils/uploadImage'
-import {getDataAPI} from '../../utils/fetchData'
-import {postDataAPI} from '../../utils/fetchData'
-import {patchDataAPI} from '../../utils/fetchData'
-import {deleteDataAPI} from '../../utils/fetchData'
+import {getDataAPI, postDataAPI, patchDataAPI, deleteDataAPI} from '../../utils/fetchData'
 
 export const POST_TYPES = {
     CREATE_POST: "CREATE_POST",
@@ -30,7 +27,6 @@ export const createPost = ({postData, images, authReducer}) => async (dispatch) 
         dispatch({ 
             type: POST_TYPES.CREATE_POST, 
             payload: res.data.newPost
-        
         })
     } catch (err) {
         dispatch({ 
@@ -59,29 +55,43 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
-// export const updatePost = (data) => async (dispatch) => {
-//     try {
-//         dispatch({type: GLOBALTYPES.NOTIFY,payload: {loading: true}})
-//         const res = await patchDataAPI('posts', data);
-//         dispatch({ 
-//             type: GLOBALTYPES.NOTIFY, 
-//             payload: {
-//                 success: res.data.msg
-//             } 
-//         });
-//         dispatch({ 
-//             type: POST_TYPES.UPDATE_POST, 
-//             payload: res.data.newPost
+export const updatePost = ({postData, images, authReducer, statusReducer}) => async (dispatch) => {
+    let media = []
+    
+    const imgNewUrl = images.filter(img => !img.url)
+    const imgOldUrl = images.filter(img => img.url)
+ 
+    if(statusReducer.title === postData.title
+       && imgNewUrl.length === 0
+       && imgOldUrl.length === statusReducer.images.length 
+    ) 
+    return;
+
+    try {
+        if(imgNewUrl.length > 0) media = await uploadImage(imgNewUrl)
+
+        const res = await patchDataAPI(`post/${statusReducer._id}`,{
+            ...postData, images: [...imgOldUrl,...media]}, authReducer.token);
         
-//         })
-//     } catch (err) {
-//         dispatch({ 
-//             type: GLOBALTYPES.NOTIFY, 
-//             payload: {
-//                 error: err.response.data.msg
-//             } 
-//         })
-//     }
-// }
+        dispatch({ 
+            type: POST_TYPES.UPDATE_POST, 
+            payload: res.data.updatePost
+        })
+
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                success: res.data.msg
+            } 
+        });
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
 
 

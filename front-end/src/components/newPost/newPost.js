@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {GLOBALTYPES} from '../../redux/actions/globalTypes'
-import { createPost } from '../../redux/actions/postAction'
+import { createPost, updatePost } from '../../redux/actions/postAction'
 import './newPost.css'
 
 const Createpost = () => {
-  const { authReducer } = useSelector(state => state)
+  const { authReducer, statusReducer } = useSelector(state => state)
   const dispatch = useDispatch()
 
   const [postData, setPostData] = useState({title: '', information: '', content: '', category: ''})
@@ -49,9 +49,23 @@ const Createpost = () => {
 }
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-      dispatch(createPost({postData, images, authReducer}))
+      event.preventDefault()
+
+      if(statusReducer.onEdit){
+        dispatch(updatePost({postData, images, authReducer, statusReducer}))
+      }else{
+        dispatch(createPost({postData, images, authReducer}))
+      }
   }
+
+
+  useEffect(() => {
+      if(statusReducer.onEdit){
+          setPostData(statusReducer.images)
+          setImages(statusReducer.images)
+      }
+  }, [statusReducer])
+
 
     return (
         <div className="editProfile">
@@ -101,7 +115,7 @@ const Createpost = () => {
                       images.map((img, index) => (
                           <div key={index} id="file_img" >
 
-                              <img src={URL.createObjectURL(img)} 
+                              <img src={img.url ? img.url : URL.createObjectURL(img)} 
                               alt="images" className="img-thumbnail" />
 
                               <span onClick={() => deleteImages(index)}>&times;</span>

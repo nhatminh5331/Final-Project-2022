@@ -4,7 +4,7 @@
     grid-gap: 2.5rem;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     .postList-wrap {
       grid-template-columns: repeat(2, 1fr);
     }

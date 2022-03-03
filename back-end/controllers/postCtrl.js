@@ -60,6 +60,20 @@ const postCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    updatePost: async(req, res) =>{
+        try {
+            const {title, information, content, images, category} = req.body;
+            if(!images) return res.status(400).json({msg: "Không có hình ảnh để cập nhật"})
+
+            const updatePost = await Posts.findOneAndUpdate({_id: req.params.id}, {
+                title, information, content, images, category
+            })
+
+            res.json({msg: "Đã cập nhật bài viết", updatePost})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
     // deletePost: async(req, res) =>{
     //     try {
     //         await Posts.findByIdAndDelete(req.params.id)
@@ -68,20 +82,7 @@ const postCtrl = {
     //         return res.status(500).json({msg: err.message})
     //     }
     // },
-    // updatePost: async(req, res) =>{
-    //     try {
-    //         const {title, information, content, images, category} = req.body;
-    //         if(!images) return res.status(400).json({msg: "Không có hình ảnh để cập nhật"})
 
-    //         await Posts.findOneAndUpdate({_id: req.params.id}, {
-    //             title, information, content, images, category
-    //         })
-
-    //         res.json({msg: "Đã cập nhật bài viết"})
-    //     } catch (err) {
-    //         return res.status(500).json({msg: err.message})
-    //     }
-    // }
 }
 
 

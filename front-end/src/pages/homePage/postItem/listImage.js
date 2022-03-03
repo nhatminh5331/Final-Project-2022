@@ -1,4 +1,5 @@
 import React from 'react'
+import './postItem.css'
 
 const listImage = ({images, id}) => {
 
