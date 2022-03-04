@@ -94,4 +94,20 @@ export const updatePost = ({postData, images, authReducer, statusReducer}) => as
     }
 }
 
+export const deletePost = ({post, authReducer}) => async (dispatch) => {
+    dispatch({type: POST_TYPES.DELETE_POST, payload: post})
+    try {
+        
+        deleteDataAPI(`post/${post._id}`, authReducer.token)
+
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
+
 

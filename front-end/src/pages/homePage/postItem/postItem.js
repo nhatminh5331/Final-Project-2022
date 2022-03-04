@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ListImage from '../postItem/listImage'
 import moment from 'moment'
 import {GLOBALTYPES} from '../../../redux/actions/globalTypes'
+import {deletePost} from '../../../redux/actions/postAction'
 
 const PostItem = ({post}) => {
   const {authReducer} = useSelector(state => state)
@@ -14,10 +15,14 @@ const PostItem = ({post}) => {
   const handleEditPost = () => {
       dispatch({type: GLOBALTYPES.STATUS, payload: {...post, onEdit: true}})
   }
+
+  const handleDeletePost = () => {
+    if(window.confirm('Are you sure want to delete ?'))
+      dispatch(deletePost({post, authReducer}))
+  }
   
   return (
     <div className='postItem-wrap'>
-
         <div className='nav-item dropdown'>
             <span className="material-icons" id="moreLink" data-toggle="dropdown">
                   more_horiz
@@ -30,12 +35,13 @@ const PostItem = ({post}) => {
                       <div className="dropdown-item" onClick={handleEditPost}>
                           <span className="material-icons">create</span> Edit Post
                       </div>
-                      <div className="dropdown-item">
+                      <div className="dropdown-item" onClick={handleDeletePost}>
                           <span className="material-icons">delete_outline</span> Delete Post
                       </div>
                   </>
                 }
             </div>
+            
         </div>
 
         {

@@ -7,7 +7,7 @@ router.route('/posts')
     .get(postCtrl.getPost)
 
 router.route('/post/:id')
-//     .delete(User, postCtrl.deletePost)
     .patch(User, postCtrl.updatePost)
+    .delete(User, postCtrl.deletePost)
 
 module.exports = router

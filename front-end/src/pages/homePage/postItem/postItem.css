@@ -32,6 +32,7 @@
 
   .postItem-wrap h3 {
     margin: 0.1rem 0 0.6rem 0.7rem;
+    font-size: 26px;
     flex: 1;
     color: rgb(43, 41, 41);
   }

@@ -74,14 +74,15 @@ const postCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    // deletePost: async(req, res) =>{
-    //     try {
-    //         await Posts.findByIdAndDelete(req.params.id)
-    //         res.json({msg: "Đã xóa bài viết"})
-    //     } catch (err) {
-    //         return res.status(500).json({msg: err.message})
-    //     }
-    // },
+    deletePost: async(req, res) =>{
+        try {
+          const post = await Posts.findOneAndDelete({_id: req.params.id, user: req.user._id})
+          
+            res.json({msg: "Đã xóa bài viết"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
 }
 
