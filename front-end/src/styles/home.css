@@ -4,6 +4,10 @@
     grid-gap: 2.5rem;
   }
   
+LoadMoreBtn {
+  font-size: 90px;
+}
+
   @media (max-width: 992px) {
     .postList-wrap {
       grid-template-columns: repeat(2, 1fr);

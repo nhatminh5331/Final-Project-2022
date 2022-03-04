@@ -3,14 +3,19 @@ import {EditData, DeleteData} from '../actions/globalTypes'
 
 const initialState = {
     loading: false,
-    posts: []
+    posts: [],
+    page: 2,
+    result: 0,
 }
 
 const postReducer = (state = initialState, action) => {
     switch (action.type){
         case POST_TYPES.GET_POSTS:
             return {
-                posts: [...action.payload],
+                ...state,
+                posts: action.payload.posts,
+                result: action.payload.result,
+                page: action.payload.page,
             };
         case POST_TYPES.CREATE_POST:
 			return {

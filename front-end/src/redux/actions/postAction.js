@@ -41,10 +41,12 @@ export const createPost = ({postData, images, authReducer}) => async (dispatch) 
 export const getPosts = () => async (dispatch) => {
     try {
         const res = await getDataAPI('posts');
+
         dispatch({ 
             type: POST_TYPES.GET_POSTS, 
-            payload: res.data.posts
+            payload: {...res.data, page: 2}
         });
+        
     } catch (err) {
         dispatch({ 
             type: GLOBALTYPES.NOTIFY, 

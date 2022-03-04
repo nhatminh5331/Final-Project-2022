@@ -1,12 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useState} from "react";
+import { useSelector, useDispatch} from "react-redux";
 import Introduce from "../../components/introduce/introduce";
 import Search from "../../components/Search/Search";
 import PostItem from "./postItem/postItem";
-// import moment from 'moment'
+import LoadMoreBtn from "../../components/loadMoreBtn"
+import { getDataAPI } from "../../utils/fetchData";
+import {POST_TYPES} from "../../redux/actions/postAction"
+
 
 const Home = () => {
-  const { posts } = useSelector(state => state.postReducer);
+
+  const {authReducer, postReducer} = useSelector(state => state)
+
+  const dispatch = useDispatch()
+
+  const [load, setLoad] = useState(false)
+
+  const handleLoadMore = async () => {
+    setLoad(true)
+    
+    const res = await getDataAPI(`posts?limit=${postReducer.page * 9}`, authReducer.token)
+    dispatch({
+      type: POST_TYPES.GET_POSTS, 
+      payload: {...res.data, page: postReducer.page + 1}
+    })
+
+    setLoad(false)
+  }
 
   return (
     <div>
@@ -16,26 +36,19 @@ const Home = () => {
 
       <div className="postList-wrap">
         {
-            posts.map((posts) => (
+            postReducer.posts.map((posts) => (
               <div key={posts._id}>
                   <PostItem post={posts} />
               </div>
             ))
         }
       </div>
+
+      <LoadMoreBtn result={postReducer.result} page={postReducer.page} load={load}
+        handleLoadMore={handleLoadMore} />
+        
     </div>
   );
 };
 
 export default Home;
-
-            // return (
-            //   <PostItem 
-            //     id={post._id}
-            //     time={moment(post.createdAt).fromNow()}
-            //     image={post.images.url}
-            //     category={post.category}
-            //     title={post.title}
-            //     content={post.content}
-            //   />
-            // );

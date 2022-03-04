@@ -5,20 +5,12 @@ const postCtrl = {
         try {
             //Filtering
             const queryObj = { ...req.query } 
-            const excludedFields = ['page', 'sort', 'limit']
+            const excludedFields = ['page', 'sort']
             excludedFields.forEach(el => delete queryObj[el])
 
             let queryString = JSON.stringify(queryObj)
             queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
             let query = Posts.find(JSON.parse(queryString)) 
-
-            // Sorting
-            if (req.query.sort) {
-                const sortPost = req.query.sort.split(',').join(' ')
-                query = query.sort(sortPost)
-              } else {
-                query = query.sort('-createdAt')
-              }
               
             //Pagination
             const page = req.query.page * 1 || 1
@@ -26,10 +18,9 @@ const postCtrl = {
             const skip = (page - 1) * limit;
             query = query.skip(skip).limit(limit);
 
-
-            const posts = await query
+            const posts = await query.sort('-createdAt')
             res.json({
-                status: 'success',
+                status: 'Success',
                 result: posts.length,
                 posts
             })

@@ -7,7 +7,7 @@ const SearchBar = () => (
         
       <input
         type='text'
-        placeholder='Search By Category'
+        placeholder='Search by Game'
       />
       
       <button>Go</button>
