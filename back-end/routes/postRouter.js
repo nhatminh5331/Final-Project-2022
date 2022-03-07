@@ -10,4 +10,6 @@ router.route('/post/:id')
     .patch(User, postCtrl.updatePost)
     .delete(User, postCtrl.deletePost)
 
+router.get('/detail_post/:id', User, postCtrl.getDetailPost)
+
 module.exports = router

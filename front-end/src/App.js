@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/auth/forgotPassword";
 import ResetPassword from "./pages/auth/resetPassword";
 import NotFound from "./components/notfound";
 import Profile from "./pages/profile/IdUser";
+import DetailPost from "./pages/detail/detailPost";
 import {useSelector, useDispatch} from "react-redux"
 import {refreshToken} from "./redux/actions/authAction"
 import { getPosts } from './redux/actions/postAction';
@@ -44,6 +45,7 @@ function App() {
             <Route path="/api/reset/:token" component={authReducer.token ? NotFound : ResetPassword} />
             <Route path="/api/activate/:activation_token" component={authReducer.token ? NotFound : ActivationEmail} />
             <Route path= "/profile/:id" component={Profile} />
+            <Route path= "/post/:id" component={DetailPost} />
             <Route path="/:error" component={NotFound} />
           </Switch>
         </div>

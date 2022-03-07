@@ -22,7 +22,7 @@ const listImage = ({images, id}) => {
           {
               images.map((img, index) => (
                 <div key={index} className={`carousel-item ${isActive(index)}`}>
-                  <img src={img.url} className="d-block w-100" alt={img.url} />
+                  <img src={img.url} alt={img.url} />
                 </div>
               ))
           }

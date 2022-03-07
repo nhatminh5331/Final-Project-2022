@@ -13,8 +13,8 @@
   
   .searchBar-wrap input {
     background-color: #f0f0f0;
-    outline: none;
     border: none;
+    outline:none;
   }
   
   .searchBar-wrap span {
@@ -23,7 +23,7 @@
   }
   
   .searchBar-wrap button {
-    outline: none;
+    outline:none;
     border: none;
     padding: 0.3rem 1rem;
     border-radius: 5px;

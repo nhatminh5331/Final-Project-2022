@@ -3,14 +3,14 @@ const Posts = require('../models/postModel')
 const postCtrl = {
     getPost: async(req, res) =>{
         try {
-            //Filtering
+            //Filtering, Search
             const queryObj = { ...req.query } 
-            const excludedFields = ['page', 'sort']
+            const excludedFields = ['page', 'sort', 'limit']
             excludedFields.forEach(el => delete queryObj[el])
 
             let queryString = JSON.stringify(queryObj)
             queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
-            let query = Posts.find(JSON.parse(queryString)) 
+            let query = Posts.find(JSON.parse(queryString))
               
             //Pagination
             const page = req.query.page * 1 || 1
@@ -43,7 +43,7 @@ const postCtrl = {
             await newPost.save()
 
             res.json({
-                msg: "Created Post !",
+                msg: "Created new post !",
                 newPost
             })
 
@@ -74,7 +74,18 @@ const postCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    getDetailPost: async(req, res) =>{
+        try {
+            const detailPost = await Posts.find({user: req.params.id}).sort('-createdAt')
 
+            res.json({
+                detailPost,
+                result: detailPost.length
+            })
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
 }
 
 

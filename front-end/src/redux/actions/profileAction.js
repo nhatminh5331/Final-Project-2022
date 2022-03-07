@@ -11,17 +11,29 @@ export const PROFILE_TYPES = {
     UPDATE_POST: 'UPDATE_PROFILE_POST'
 }
 
-export const getProfileUsers = ({users, id, authReducer}) => async (dispatch) =>{
+export const getProfileUsers = ({ id, authReducer}) => async (dispatch) =>{
 
-    if(users.every(user => user._id !== id)){
+    dispatch({type: PROFILE_TYPES.GET_ID, payload: id})
 
         try { 
             dispatch({type: PROFILE_TYPES.LOADING, payload: true})
-            const res = await getDataAPI(`/user/${id}`, authReducer.token)
+
+            const res = getDataAPI(`/user/${id}`, authReducer.token)
+            const resDetail = getDataAPI(`/detail_post/${id}`, authReducer.token)
+
+            const users = await res
+            const posts = await resDetail
+
             dispatch({
                 type: PROFILE_TYPES.GET_USER,
-                payload: res.data
+                payload: users.data
             })
+
+            dispatch({
+                type: PROFILE_TYPES.GET_POSTS,
+                payload: {...posts.data, _id: id, page: 2}
+            })
+
             dispatch({type: PROFILE_TYPES.LOADING, payload: false})
             
         } catch(err){
@@ -32,9 +44,7 @@ export const getProfileUsers = ({users, id, authReducer}) => async (dispatch) =>
                 }
             })
         }
-    }
 }
-
 
 export const updateProfileUser = ({userData, avatar, authReducer}) => async (dispatch) => {
     if(!userData.fullname)

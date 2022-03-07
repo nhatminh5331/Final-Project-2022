@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import {useParams, Link} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import {Link} from 'react-router-dom'
 import { getProfileUsers } from '../../redux/actions/profileAction'
 import EditProfile from './EditProfile'
 
-const Info = () => {
-    const {id} = useParams()
-    const {authReducer, profileReducer} = useSelector(state => state)
-    const dispatch = useDispatch()
-
+const Info = ({id, authReducer, profileReducer, dispatch}) => {
     const [userData, setUserData] = useState([])
     const [onEdit, setOnEdit] = useState(false)
 
@@ -33,6 +28,7 @@ const Info = () => {
                     <div className="info_profile_title">
 
                         <h2>{user.username}</h2>
+
                         {
                           user._id === authReducer.userCurrent._id
                           ? <button className="btn btn-outline-info"
@@ -43,7 +39,6 @@ const Info = () => {
                           : <button className="d-none">Hidden button</button>
                           
                         }
-              
 
                     </div>
 
