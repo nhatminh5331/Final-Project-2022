@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/authAction'
 import { GiHamburgerMenu } from "react-icons/gi"
+import "boxicons"
 
 const Header = () => {
 

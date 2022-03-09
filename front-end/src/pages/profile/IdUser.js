@@ -15,7 +15,7 @@ const Profile = () => {
     if(profileReducer.ids.every(item => item !== id)){
       dispatch(getProfileUsers({users: profileReducer.users, id, authReducer}))
     }
-  },[dispatch, id, profileReducer.users, authReducer])
+  },[dispatch, id, profileReducer.users, authReducer, profileReducer.ids])
 
   return (
     <div className="profile">

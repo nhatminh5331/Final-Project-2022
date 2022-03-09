@@ -1,4 +1,24 @@
-.editProfile .create_header{
+.newPost{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0008;
+    z-index: 9;
+    overflow: auto;
+}
+
+.newPost form{
+    max-width: 580px;
+    width: 100%;
+    background: #fff;
+    padding: 26px;
+    border-radius: 15px;
+    margin: 20px auto
+}
+
+.newPost .create_header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,32 +27,32 @@
     margin-top: -20px;
     padding-bottom: 2px;
 }
-.editProfile .create_header span{
+.newPost .create_header span{
     font-size: 2rem;
     cursor: pointer;
 }
-.editProfile .input_images{
+.newPost .input_images{
     display: flex;
     justify-content: center;
     margin: 10px 0 ;
 }
-.editProfile .input_images i{
+.newPost .input_images i{
     font-size: 2rem;
     cursor: pointer;
 }
-.editProfile .file_upload{
+.newPost .file_upload{
     position: relative;
     overflow: hidden;
     margin: 0 10px;
 }
-.editProfile .file_upload #file{
+.newPost .file_upload #file{
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
 }
 
-.editProfile .show_images{
+.newPost .show_images{
     max-height: 250px;
     width: 100%;
     overflow-y: auto;
@@ -42,17 +62,17 @@
     place-items: center;
     grid-gap: 2px;
 }
-.editProfile .show_images #file_img{
+.newPost .show_images #file_img{
     position: relative;
     width: 100%;
     height: 100%;
 }
-.editProfile .show_images #file_img img{
+.newPost .show_images #file_img img{
     display: block;
     width: 100%;
     height: 100%;
 }
-.editProfile .show_images #file_img span{
+.newPost .show_images #file_img span{
     position: absolute;
     top: -1px;
     right: -2px;

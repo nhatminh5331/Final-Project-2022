@@ -6,10 +6,11 @@ router.route('/posts')
     .post(User, postCtrl.createPost)    
     .get(postCtrl.getPost)
 
-router.route('/post/:id')
+router.route('/post/:id')  
     .patch(User, postCtrl.updatePost)
     .delete(User, postCtrl.deletePost)
+    .get(User, postCtrl.getDetailPost)
 
-router.get('/detail_post/:id', User, postCtrl.getDetailPost)
+router.get('/user_post/:id', User, postCtrl.getUserPost)
 
 module.exports = router

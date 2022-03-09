@@ -6,13 +6,13 @@ const Posts = ({id, authReducer, profileReducer, dispatch}) => {
     const [result, setResult] = useState(4)
 
     useEffect(() => {
-        profileReducer.userPosts.forEach(data => {
+        profileReducer.allposts.forEach(data => {
             if(data._id === id) {
-                setPosts(data.detailPost)
+                setPosts(data.userPost)
                 setResult(data.result)
             }
         })
-    },[profileReducer.userPosts, id])
+    },[profileReducer.allposts, id])
 
     return (
         <div>

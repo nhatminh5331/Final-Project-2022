@@ -4,6 +4,7 @@ import notifyReducer from './notifyReducer'
 import postReducer from './postReducer'
 import profileReducer from './profileReducer'
 import statusReducer from './statusReducer'
+import detailPostReducer from './detailPostReducer'
 
 const rootReducer =  combineReducers({
     authReducer,
@@ -11,6 +12,7 @@ const rootReducer =  combineReducers({
     profileReducer,
     statusReducer,
     postReducer,
+    detailPostReducer,
 })
 
 export default rootReducer

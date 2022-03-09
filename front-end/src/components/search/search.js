@@ -10,7 +10,7 @@ const SearchBar = () => (
         placeholder='Search by Game'
       />
       
-      <button>Go</button>
+      <button><box-icon name='search' color='white' size='20px'></box-icon></button>
     </form>
   </div>
 );

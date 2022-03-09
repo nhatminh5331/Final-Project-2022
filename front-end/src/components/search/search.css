@@ -17,15 +17,10 @@
     outline:none;
   }
   
-  .searchBar-wrap span {
-    padding-right: 0.5rem;
-    cursor: pointer;
-  }
-  
   .searchBar-wrap button {
     outline:none;
     border: none;
-    padding: 0.3rem 1rem;
+    padding: 0.3rem 0.7rem 0 0.7rem;
     border-radius: 5px;
     background-color: #3e6cb3;
     color: #fff;

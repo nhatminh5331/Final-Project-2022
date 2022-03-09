@@ -39,13 +39,13 @@ const sendEmail = (to, url, txt) => {
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
         to: to,
-        subject:'Novarea',
+        subject:'GameMortal',
         html:`
         <div style=" max-width: 600px; margin:auto; border: 8px solid rgb(100, 100, 100); padding: 50px 20px; font-size: 120%;">
     
-            <h2 style="text-align: center; color: darkslategray;">Welcome to Novarea !</h2>
+            <h2 style="text-align: center; color: darkslategray;">Welcome to GameMortal !</h2>
     
-            <p>Congratulations! You have completed the account to join the Novarea community.
+            <p>Congratulations! You have completed the account to join the GameMortal community.
             Just click the button below to validate your email account.
             </p>
     

@@ -19,7 +19,7 @@ export const getProfileUsers = ({ id, authReducer}) => async (dispatch) =>{
             dispatch({type: PROFILE_TYPES.LOADING, payload: true})
 
             const res = getDataAPI(`/user/${id}`, authReducer.token)
-            const resDetail = getDataAPI(`/detail_post/${id}`, authReducer.token)
+            const resDetail = getDataAPI(`/user_post/${id}`, authReducer.token)
 
             const users = await res
             const posts = await resDetail

@@ -68,7 +68,7 @@ const Createpost = () => {
 
 
     return (
-        <div className="editProfile">
+        <div className="newPost">
             <form onSubmit={handleSubmit}>
                 <div className="create_header">
                     <h5 className="m-0">New post</h5>
@@ -97,7 +97,7 @@ const Createpost = () => {
 
                 <div className="form-group">
                   <label htmlFor="content">Content</label>
-                    <textarea name="content" value={content} cols="30" rows="6"
+                    <textarea name="content" value={content} cols="30" rows="7"
                     className="form-control" onChange={handleInput}/>
                 </div>
 

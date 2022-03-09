@@ -74,18 +74,27 @@ const postCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    getDetailPost: async(req, res) =>{
+    getUserPost: async(req, res) =>{
         try {
-            const detailPost = await Posts.find({user: req.params.id}).sort('-createdAt')
+            const userPost = await Posts.find({user: req.params.id}).sort('-createdAt')
 
             res.json({
-                detailPost,
-                result: detailPost.length
+                userPost,
+                result: userPost.length
             })
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+    getDetailPost: async(req, res) =>{
+        try {
+            const getDetailPost = await Posts.findById(req.params.id)
+
+            res.json({getDetailPost})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 }
 
 

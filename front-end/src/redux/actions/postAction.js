@@ -112,4 +112,22 @@ export const deletePost = ({post, authReducer}) => async (dispatch) => {
     }
 }
 
+export const getPost = ({detailPostReducer, id, authReducer}) => async (dispatch) => {
+    if(detailPostReducer.every(post => post._id !== id)){
+        try {
+            const res = await getDataAPI(`post/${id}`, authReducer.token)
+            dispatch({ type: POST_TYPES.GET_POST, payload: res.data.getDetailPost})
+
+        } catch (err) {
+            dispatch({
+                type: GLOBALTYPES.NOTIFY,
+                payload: {
+                    error: err.response.data.msg
+                } 
+            })
+        }
+    }
+    
+}
+
 
