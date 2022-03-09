@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPost } from '../../redux/actions/postAction'
+import DetailItem from './detailItem';
+
 
 const DetailPost = () => {
   const {id} = useParams()
   const [post, setPost] = useState([])
 
   const {authReducer, detailPostReducer} = useSelector(state => state)
+  console.log(detailPostReducer)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +23,13 @@ const DetailPost = () => {
   }, [detailPostReducer, authReducer, dispatch, id])
 
   return (
-    <div>DetailPost {id}</div>
+    <div className="detailPost">
+        {
+            post.map((item) => (
+                  <DetailItem key={item._id} post={item} />
+            ))
+        }        
+    </div>
   )
 }
 

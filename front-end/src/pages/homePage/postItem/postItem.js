@@ -50,7 +50,7 @@ const PostItem = ({post}) => {
 
         
         <small className='text-muted'>
-          {moment(post.createdAt).fromNow()}
+          {moment(post.createdAt).fromNow()} 
         </small>
 
         <h3>{post.title}</h3>
