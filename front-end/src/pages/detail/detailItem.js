@@ -6,6 +6,8 @@ import DetailListImage from "./detailListImage";
 import moment from "moment";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import { deletePost } from "../../redux/actions/postAction";
+import ShowComment from '../../components/comment/showComment';
+import InputComment from '../../components/comment/inputComment';
 
 const PostItem = ({ post }) => {
   const { authReducer } = useSelector((state) => state);
@@ -62,6 +64,11 @@ const PostItem = ({ post }) => {
         <h5>Category</h5><p className="chip">{post.category}</p>
     </div>
       </section>
+
+    <section>
+      <InputComment post={post}/>
+      <ShowComment post={post}/>
+    </section>
 
     </div>
   );
