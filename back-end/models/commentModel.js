@@ -10,7 +10,6 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId, 
         ref: 'user'
     },
-    reply: mongoose.Types.ObjectId,
 }, {
     timestamps: true
 })

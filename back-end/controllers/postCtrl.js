@@ -18,7 +18,7 @@ const postCtrl = {
             const skip = (page - 1) * limit;
             query = query.skip(skip).limit(limit);
 
-            const posts = await query.sort('-createdAt')
+            const posts = await query.sort('-createdAt').populate("user", "avatar username")
             res.json({
                 status: 'Success',
                 result: posts.length,
@@ -89,6 +89,10 @@ const postCtrl = {
     getDetailPost: async(req, res) =>{
         try {
             const getDetailPost = await Posts.findById(req.params.id)
+            .populate("user", "avatar username")
+            .populate({
+                path: "comments"
+            })
 
             res.json({getDetailPost})
         } catch (err) {

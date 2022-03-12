@@ -48,11 +48,14 @@ const Header = () => {
               </span>
 
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item" to={`/profile/${authReducer.userCurrent._id}`}>Profile</Link>
+                <Link className="dropdown-item" to={`/profile/${authReducer.userCurrent._id}`}>
+                  Profile
+                </Link>
                   <div className="dropdown-divider"></div>
                 <Link className="dropdown-item" to="/" 
                 onClick={() => dispatch(logout())}>
-                  Logout</Link>
+                  Logout
+                </Link>
               </div>
             </li>
 

@@ -23,25 +23,34 @@ const PostItem = ({post}) => {
   
   return (
     <div className='postItem-wrap'>
-        <div className='nav-item dropdown'>
-            <span className="material-icons" id="moreLink" data-toggle="dropdown">
-                  more_horiz
-            </span>
+        <div className="header">
+          <div className="d-flex">
+            <img src={post.user.avatar} alt="cover" className="small-avatar"/> 
+            <h6>
+              <Link to={`/profile/${post.user._id}`} className="text-dark">
+                  {post.user.username}
+              </Link>
+            </h6>
+          </div>
 
-            <div className="dropdown-menu">
-                {
-                  authReducer.userCurrent._id === post.user &&
-                  <>
-                      <div className="dropdown-item" onClick={handleEditPost}>
-                          <span className="material-icons">create</span> Edit Post
-                      </div>
-                      <div className="dropdown-item" onClick={handleDeletePost}>
-                          <span className="material-icons">delete_outline</span> Delete Post
-                      </div>
-                  </>
-                }
+            <div className='nav-item dropdown'>
+              {authReducer.userCurrent._id === post.user._id &&
+                <>
+                  <span className="material-icons" id="moreLink" data-toggle="dropdown">
+                    more_horiz
+                  </span>
+
+                  <div className="dropdown-menu">
+                    <div className="dropdown-item" onClick={handleEditPost}>
+                      <span className="material-icons">create</span> Edit Post
+                    </div>
+                    <div className="dropdown-item" onClick={handleDeletePost}>
+                        <span className="material-icons">delete_outline</span> Delete Post
+                    </div>
+                  </div>
+                </>
+              }
             </div>
-            
         </div>
 
         {

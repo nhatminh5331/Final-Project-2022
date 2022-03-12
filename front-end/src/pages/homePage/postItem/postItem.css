@@ -5,16 +5,33 @@
     border-radius: 4px
   }
 
-  .postItem-wrap .nav-item {
-    margin-top: -57px;
-    margin-bottom: -10px;
-    cursor: pointer;
-  }
-
-  .postItem-wrap .nav-item .dropdown-item {
+  .postItem-wrap .header {
     display: flex;
-    margin : 5px 0
-  }
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 10px 12px 10px;
+}
+
+.postItem-wrap .header h6{
+  margin: 10px 0 0 8px;
+}
+
+.postItem-wrap .nav-item{
+  bottom: 4px;
+  margin: -20px 0px -21px 0px;
+}
+
+.postItem-wrap .nav-item .dropdown-menu{
+  position: absolute;
+  left: inherit !important;
+  right: 0;
+}
+
+.postItem-wrap .nav-item .dropdown-item {
+  display: flex;
+  margin : 6px 0
+}
 
  .carousel  {
     width: 100%;

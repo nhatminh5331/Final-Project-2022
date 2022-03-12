@@ -4,10 +4,10 @@ const Posts = require('../models/postModel')
 const commentCtrl = {
     createComment: async (req, res) => {
         try {
-            const {postId, content, reply} = req.body
+            const {postId, content} = req.body
 
             const newComment = new Comment({
-                user: req.user._id, content, reply
+                user: req.user._id, content
             })
 
             await Posts.findOneAndUpdate({_id: postId},{
