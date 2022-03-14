@@ -13,3 +13,9 @@ img{
     height: 37px;
     border-radius: 50%;
   }
+
+.super-small-avatar{
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+}

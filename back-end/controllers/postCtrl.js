@@ -91,7 +91,10 @@ const postCtrl = {
             const getDetailPost = await Posts.findById(req.params.id)
             .populate("user", "avatar username")
             .populate({
-                path: "comments"
+                path: "comments",
+                populate: {
+                    path: "user"
+                }
             })
 
             res.json({getDetailPost})

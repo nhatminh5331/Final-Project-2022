@@ -18,3 +18,13 @@
     background: #f7f7f7;
     font-weight: 500;
 }
+/*----------------Comments------------------*/
+.commentItem{
+    padding: 10px 20px
+}
+
+.commentItem .commentContent{
+    background: rgb(221, 221, 221);
+    padding: 4px;
+    border-radius: 8px;
+}

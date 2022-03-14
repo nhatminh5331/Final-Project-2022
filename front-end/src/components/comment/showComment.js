@@ -1,9 +1,15 @@
 import React from 'react'
+import ItemComment from './itemComment'
 
-const ShowComment = () => {
+const ShowComment = ({post}) => {
     return (
-        <div>
-            <h2>show comment</h2>
+        <div className="showComments">
+            {
+                post.comments.map(comment => (
+                    <ItemComment key={comment._id}
+                    comment={comment} post={post} />
+                ))
+            }
         </div>
     )
 }
