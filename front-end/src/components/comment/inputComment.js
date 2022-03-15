@@ -25,7 +25,6 @@ const InputComment = ({post}) => {
 
     return (
         <form className="commentInput card-footer" onSubmit={handleSubmit}>
-            {/* {children} */}
             <input type="text" placeholder="Add comment..."
             value={content} onChange={e => setContent(e.target.value)} />
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import { getProfileUsers } from '../../redux/actions/profileAction'
 import EditProfile from './EditProfile'
 
 const Info = ({id, authReducer, profileReducer, dispatch}) => {
@@ -11,7 +10,6 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
         if(id === authReducer.userCurrent?._id){ 
             setUserData([authReducer.userCurrent])
          }else{
-           dispatch(getProfileUsers({users: profileReducer.users, id, authReducer}))
            const newData = profileReducer.users.filter(user => user._id === id)
            setUserData(newData)
          }

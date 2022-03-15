@@ -9,7 +9,6 @@ const DetailPost = () => {
   const [post, setPost] = useState([])
 
   const {authReducer, detailPostReducer} = useSelector(state => state)
-  console.log(detailPostReducer)
   const dispatch = useDispatch()
 
   useEffect(() => {
