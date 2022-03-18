@@ -25,7 +25,7 @@ const PostItem = ({post}) => {
     <div className='postItem-wrap'>
         <div className="header">
           <div className="d-flex">
-            <img src={post.user.avatar} alt="cover" className="small-avatar"/> 
+            <img src={post.user.avatar} alt={post.user.avatar} className="small-avatar"/> 
             <h6>
               <Link to={`/profile/${post.user._id}`} className="text-dark">
                   {post.user.username}
@@ -36,6 +36,7 @@ const PostItem = ({post}) => {
             <div className='nav-item dropdown'>
               {authReducer.userCurrent._id === post.user._id &&
                 <>
+
                   <span className="material-icons" id="moreLink" data-toggle="dropdown">
                     more_horiz
                   </span>
@@ -45,9 +46,10 @@ const PostItem = ({post}) => {
                       <span className="material-icons">create</span> Edit Post
                     </div>
                     <div className="dropdown-item" onClick={handleDeletePost}>
-                        <span className="material-icons">delete_outline</span> Delete Post
+                      <span className="material-icons">delete_outline</span> Delete Post
                     </div>
                   </div>
+
                 </>
               }
             </div>

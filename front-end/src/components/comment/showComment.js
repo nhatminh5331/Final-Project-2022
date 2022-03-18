@@ -2,6 +2,7 @@ import React from 'react'
 import ItemComment from './itemComment'
 
 const ShowComment = ({post}) => {
+
     return (
         <div className="showComments">
             {

@@ -23,8 +23,23 @@
     padding: 10px 20px
 }
 
+
 .commentItem .commentContent{
     background: rgb(221, 221, 221);
     padding: 4px;
     border-radius: 8px;
 }
+
+.commentItem .commentMenu .nav-item{
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    margin: auto 60px auto;
+}
+
+.commentItem .commentContent textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+}
+

@@ -34,7 +34,7 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
                             Update 
                           </button>
 
-                          : <button className="d-none">Hidden button</button>
+                          : <Link to="/chat"><button className="btn btn-outline-info">Message</button></Link>
                           
                         }
 
