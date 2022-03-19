@@ -1,0 +1,28 @@
+.table_user{
+    border-collapse: collapse;
+    width: 100%;
+}
+.table_user td,
+.table_user th{
+    border: 1px solid rgb(207, 207, 207);
+    padding: 10px;
+    min-width: 10px;
+    text-align: center;
+}
+
+.table_user th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background: #555;
+    color: white;
+}
+.table_user i{
+    cursor: pointer;
+}
+.table_user .fa-trash-alt{
+    background: rgb(121, 121, 121);
+    padding: 7px;
+    color: white;
+    font-size: 15px;
+}
+
