@@ -8,10 +8,11 @@ export const PROFILE_TYPES = {
     GET_USER: 'GET_PROFILE_USER',
     GET_ID: 'GET_PROFILE_ID',
     GET_POSTS: 'GET_PROFILE_POSTS',
-    UPDATE_POST: 'UPDATE_PROFILE_POST'
+    UPDATE_POST: 'UPDATE_PROFILE_POST',
+    GET_ALL_USER: 'GET_ALL_USER'
 }
 
-export const getProfileUsers = ({ id, authReducer}) => async (dispatch) =>{
+export const getProfileUsers = ({ id, authReducer}) => async (dispatch) => {
 
     dispatch({type: PROFILE_TYPES.GET_ID, payload: id})
 

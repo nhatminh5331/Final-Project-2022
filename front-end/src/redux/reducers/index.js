@@ -5,6 +5,7 @@ import postReducer from './postReducer'
 import profileReducer from './profileReducer'
 import statusReducer from './statusReducer'
 import detailPostReducer from './detailPostReducer'
+import allUserReducer from './getAllUserReducer'
 
 const rootReducer =  combineReducers({
     authReducer,
@@ -13,6 +14,7 @@ const rootReducer =  combineReducers({
     statusReducer,
     postReducer,
     detailPostReducer,
+    allUserReducer
 })
 
 export default rootReducer

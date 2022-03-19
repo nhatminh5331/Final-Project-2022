@@ -1,12 +1,11 @@
 const Users = require('../models/userModel')
 
-const Admin = (req, res, next) => {
+const Admin = async (req, res, next) => {
     try {
-
-        const user = Users.findOne({_id: req.user.id})
+        const user = await Users.findOne({_id: req.user.id})
 
         if(user.role !== 1) 
-            return res.status(500).json({msg: "Không có quyền truy cập admin."})
+            return res.status(500).json({msg: "Admin access denied."})
 
         next();
 
