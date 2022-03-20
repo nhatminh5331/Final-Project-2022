@@ -114,7 +114,6 @@ const Createpost = () => {
                     {
                       images.map((img, index) => (
                           <div key={index} id="file_img" >
-
                               <img src={img.url ? img.url : URL.createObjectURL(img)} 
                               alt="images" className="img-thumbnail" />
 

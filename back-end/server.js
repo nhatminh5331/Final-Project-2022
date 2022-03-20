@@ -13,6 +13,15 @@ app.use(fileUpload({
   useTempFiles: true
 }));
 
+//Socket.io
+
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+
+io.on('connection',socket => {
+  console.log(socket.id + " is connected");
+})
+
 //Routes
 app.use('/api', require("./routes/authRouter"));
 app.use('/api', require("./routes/categoryRouter"))
@@ -37,6 +46,6 @@ mongoose.connect(
 );
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Server is running at ${port}`);
 });

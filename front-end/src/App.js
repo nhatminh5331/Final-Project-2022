@@ -16,6 +16,8 @@ import {refreshToken} from "./redux/actions/authAction";
 import { getPosts } from './redux/actions/postAction';
 import CreatePost from "./components/newPost/newPost";
 import AllUser from "./pages/allUser/allUser"
+import io from "socket.io-client"
+import {GLOBALTYPES} from "./redux/actions/globalTypes"
 
 function App() {
   const {authReducer, statusReducer} = useSelector(state => state)
@@ -23,6 +25,10 @@ function App() {
 
   useEffect(() => {
       dispatch(refreshToken())
+      const socket = io();
+      console.log(socket)
+      dispatch({type: GLOBALTYPES.SOCKET, payload: socket})
+      return () => socket.close()
   },[dispatch])
 
   useEffect(() => {
