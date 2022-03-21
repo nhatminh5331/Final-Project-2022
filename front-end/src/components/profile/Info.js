@@ -29,12 +29,15 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
 
                         {
                           user._id === authReducer.userCurrent._id
-                          ? <button className="btn btn-outline-info"
-                          onClick={() => setOnEdit(true)}>
-                            Update 
-                          </button>
 
-                          : <Link to="/chat"><button className="btn btn-outline-info">Message</button></Link>
+                          ? <button className="btn btn-outline-info"
+                            onClick={() => setOnEdit(true)}>
+                              Update 
+                            </button>
+
+                          : <Link to="/chat"><button className="btn btn-outline-info">
+                              Message
+                            </button></Link>
                           
                         }
 

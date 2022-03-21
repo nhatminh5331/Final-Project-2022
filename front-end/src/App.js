@@ -16,6 +16,7 @@ import {refreshToken} from "./redux/actions/authAction";
 import { getPosts } from './redux/actions/postAction';
 import CreatePost from "./components/newPost/newPost";
 import AllUser from "./pages/allUser/allUser"
+import Chat from "./pages/chat/chat"
 import io from "socket.io-client"
 import {GLOBALTYPES} from "./redux/actions/globalTypes"
 
@@ -54,6 +55,7 @@ function App() {
             <Route path= "/profile/:id" component={Profile} />
             <Route path= "/post/:id" component={DetailPost} />
             <Route path= "/all_user" component={AllUser} />
+            <Route path= "/chat" component={Chat} />
             <Route path="/:error" component={NotFound} />
           </Switch>
         </div>

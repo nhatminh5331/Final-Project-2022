@@ -36,3 +36,5 @@ code {
 @import url('./styles/avatar.css');
 /*---------------Profile CSS---------------*/
 @import url('./styles/profile.css');
+/*---------------Chat CSS---------------*/
+@import url('./styles/chat.css');

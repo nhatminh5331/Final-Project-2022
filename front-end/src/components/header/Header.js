@@ -35,9 +35,10 @@ const Header = () => {
               <Link to="/chat">Chat</Link>
             </li>
             <li>
-              { authReducer.userCurrent.role === 1 ?
-                <Link to="/all_user">Manage User</Link>
-                : <Link to="/about">About</Link>
+              { 
+                authReducer.userCurrent.role === 1 
+                ? <Link to="/all_user">Manage user</Link>
+                : <Link to="/profile/6203778bbb1c830340d98358">About</Link>
               }
             </li>
           </ul>
