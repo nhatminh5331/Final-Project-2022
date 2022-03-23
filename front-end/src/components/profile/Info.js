@@ -28,7 +28,7 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
                         <h2>{user.username}</h2>
 
                         {
-                          user._id === authReducer.userCurrent._id
+                          user._id === authReducer.userCurrent?._id
 
                           ? <button className="btn btn-outline-info"
                             onClick={() => setOnEdit(true)}>

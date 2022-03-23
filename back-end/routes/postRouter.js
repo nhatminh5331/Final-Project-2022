@@ -11,6 +11,7 @@ router.route('/post/:id')
     .delete(User, postCtrl.deletePost)
     .get(User, postCtrl.getDetailPost)
 
-router.get('/user_post/:id', User, postCtrl.getUserPost)
+router.route('/user_post/:id')
+    .get(postCtrl.getUserPost)
 
 module.exports = router

@@ -5,3 +5,32 @@
     border-radius: 5px; */
     margin-top: 25px
 }
+.chat_search{
+    background-color: #f0f0f0;
+    padding: 0.6rem;
+    border-radius: 12px;
+    margin-right: 9%;
+}
+.chat_search form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chat_search input {
+    width: 100%;
+    background-color: #f0f0f0;
+    border: none;
+    outline:none;
+    padding: 0 5px;
+  }
+  
+  .chat_search button {
+    outline:none;
+    border: none;
+    padding: 0.3rem 0.3rem 0 0.3rem;
+    border-radius: 15px;
+    background-color: #5788d1;
+    color: #fff;
+  }

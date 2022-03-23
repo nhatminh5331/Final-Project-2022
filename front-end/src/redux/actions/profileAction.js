@@ -12,15 +12,15 @@ export const PROFILE_TYPES = {
     GET_ALL_USER: 'GET_ALL_USER'
 }
 
-export const getProfileUsers = ({ id, authReducer}) => async (dispatch) => {
+export const getProfileUsers = ({id}) => async (dispatch) => {
 
     dispatch({type: PROFILE_TYPES.GET_ID, payload: id})
 
         try { 
             dispatch({type: PROFILE_TYPES.LOADING, payload: true})
 
-            const res = getDataAPI(`/user/${id}`, authReducer.token)
-            const resDetail = getDataAPI(`/user_post/${id}`, authReducer.token)
+            const res = getDataAPI(`/user/${id}`)
+            const resDetail = getDataAPI(`user_post/${id}`)
 
             const users = await res
             const posts = await resDetail

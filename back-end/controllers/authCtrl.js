@@ -125,7 +125,7 @@ const authCtrl = {
   },
   logout: async (req, res) => {
     try {
-      res.clearCookie("refreshtoken", { path: "/api/refresh_token" });
+      res.clearCookie("refreshtoken", { path:"/api/refresh_token"});
       return res.json({ msg: "Đăng xuất thành công !" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
