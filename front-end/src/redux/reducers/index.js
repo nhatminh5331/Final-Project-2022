@@ -7,6 +7,7 @@ import statusReducer from './statusReducer'
 import detailPostReducer from './detailPostReducer'
 import allUserReducer from './getAllUserReducer'
 import socketReducer from './socketReducer'
+import chatReducer from './chatReducer'
 
 const rootReducer =  combineReducers({
     authReducer,
@@ -16,7 +17,8 @@ const rootReducer =  combineReducers({
     postReducer,
     detailPostReducer,
     allUserReducer,
-    socketReducer
+    socketReducer,
+    chatReducer
 })
 
 export default rootReducer

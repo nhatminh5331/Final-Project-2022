@@ -18,8 +18,7 @@ const Header = () => {
       <nav className="main-nav">
         <div className="logo">
           <Link to='/'>
-            <span>G</span>ame
-            <span>M</span>ortal
+            <span>G</span>ameta
           </Link>
         </div>
 

@@ -57,16 +57,16 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 /* ----------- Grid part ends ----------------- */
 
 .logo  {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 500;
   text-transform: uppercase;
-  background: -webkit-linear-gradient(#eee, rgb(54, 38, 231));
+  background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(50, 32, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .logo span {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
 }
 
 .menu-link ul li {
@@ -127,10 +127,13 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 @media (max-width: 1080px) {
   .main-nav {
     height: 6rem;
-    grid-template-columns: 2rem 1fr 2fr 1fr 2rem;
+    grid-template-columns: 6rem 1fr 2fr 1fr 6rem;
   }
 
-  .logo,
+  .logo{
+    height: 5rem;
+  }
+
   .menu-link ul {
     height: 6rem;
   }
@@ -140,14 +143,13 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 @media (max-width: 998px) {
   .main-nav {
     height: 6rem;
-    grid-template-columns: 2rem 2fr 3fr 2rem 2rem;
+    grid-template-columns: 5rem 2fr 1fr 2rem 3rem;
   }
 
   .menu-link {
     display: none;
   }
 
-  .logo,
   .user-profile ul {
     height: 6rem;
   }
@@ -216,10 +218,9 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 @media (max-width: 798px) {
   .main-nav {
     height: 6rem;
-    grid-template-columns: 1rem 2fr 1fr 2fr 1rem;
+    grid-template-columns: 4rem 2fr 1fr 2fr 3rem;
   }
 
-  .logo,
   .user-profile ul {
     height: 6rem;
   }
@@ -244,10 +245,9 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 @media (max-width: 520px) {
   .main-nav {
     height: 6rem;
-    grid-template-columns: 1rem 3fr 1fr 1fr 1rem;
+    grid-template-columns: 3rem 2fr 1fr 2fr 2rem;
   }
 
-  .logo,
   .user-profile ul {
     height: 6rem;
   }
