@@ -1,8 +1,9 @@
 import React from 'react'
 import SearchUser from '../../components/chat/SearchUser'
+import ShowChat from '../../components/chat/ShowChat'
 
-const Chat = () => {
-  return (
+const Conversation = () => {
+    return (
         <div className="chat d-flex">
             <div className="col-md-3 border-right px-0">
 
@@ -10,11 +11,11 @@ const Chat = () => {
 
             </div>
 
-            <div className="col-md-8 px-0">
-                    <h2>No user here</h2>
+            <div className="col-md-8 px-0 pl-4">
+                    <ShowChat />
             </div>
         </div>
   )
 }
 
-export default Chat
+export default Conversation

@@ -6,7 +6,7 @@ import {GLOBALTYPES} from '../../redux/actions/globalTypes'
 import {useHistory} from 'react-router-dom'
 import {getInfoUser} from '../../redux/actions/chatAction'
 
-const ListUser = () => {
+const SearchUser = () => {
   const [searchUser, setSearchUser] = useState('')
   const [users, setUsers] = useState([])
 
@@ -37,7 +37,7 @@ const ListUser = () => {
       setSearchUser('')
       setUsers([])
       dispatch(getInfoUser({user, chatReducer}))
-      return history.push()
+      return history.push(`/chat/${user._id}`)
   }
 
 
@@ -86,4 +86,4 @@ const ListUser = () => {
   )
 }
 
-export default ListUser
+export default SearchUser

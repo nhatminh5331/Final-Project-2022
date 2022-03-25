@@ -17,6 +17,7 @@ import { getPosts } from './redux/actions/postAction';
 import CreatePost from "./components/newPost/newPost";
 import AllUser from "./pages/allUser/allUser"
 import Chat from "./pages/chat/chat"
+import Conversation from "./pages/chat/conversation"
 import io from "socket.io-client"
 import {GLOBALTYPES} from "./redux/actions/globalTypes"
 
@@ -48,14 +49,15 @@ function App() {
         <div className="main">
           <Switch>
             <Route exact path="/" component={authReducer.token ? Home : Login} />
-            <Route exact path="/register" component={authReducer.token ? NotFound : Register} />
+            <Route path="/register" component={authReducer.token ? NotFound : Register} />
             <Route path="/forgotpassword" component={authReducer.token ? NotFound : ForgotPassword} />
             <Route path="/api/reset/:token" component={authReducer.token ? NotFound : ResetPassword} />
             <Route path="/api/activate/:activation_token" component={authReducer.token ? NotFound : ActivationEmail} />
             <Route path= "/profile/:id" component={Profile} />
             <Route path= "/post/:id" component={DetailPost} />
             <Route path= "/all_user" component={AllUser} />
-            <Route path= "/chat" component={Chat} />
+            <Route exact path= "/chat" component={Chat} />
+            <Route path= "/chat/:id" component={Conversation} />
             <Route path="/:error" component={NotFound} />
           </Switch>
         </div>
