@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import EditProfile from './EditProfile'
+import {getInfoUser} from '../../redux/actions/chatAction'
+import {useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 
 const Info = ({id, authReducer, profileReducer, dispatch}) => {
     const [userData, setUserData] = useState([])
     const [onEdit, setOnEdit] = useState(false)
+
+    const {chatReducer} = useSelector(state => state)
+    const history = useHistory()
 
     useEffect(() => {
         if(id === authReducer.userCurrent?._id){ 
@@ -14,6 +20,11 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
            setUserData(newData)
          }
     }, [id, authReducer, dispatch, profileReducer.users])
+
+    const handleGetInfoUser = (user) => {
+      dispatch(getInfoUser({user, chatReducer}))
+      return history.push(`/chat/${user._id}`)
+  }
     
   return (
     <div className="info">
@@ -35,9 +46,11 @@ const Info = ({id, authReducer, profileReducer, dispatch}) => {
                               Update 
                             </button>
 
-                          : <Link to="/chat"><button className="btn btn-outline-info">
+                          : <button className="btn btn-outline-info"
+                            onClick={() => handleGetInfoUser(user)}>
                               Message
-                            </button></Link>
+                            </button>
+                            
                           
                         }
 

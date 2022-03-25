@@ -4,3 +4,10 @@
     margin-top: 6px;
     margin-right: 9%;
 }
+
+.display_user:active{
+    background-color: #b3b3b3;
+}
+
+
+

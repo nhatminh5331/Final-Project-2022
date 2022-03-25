@@ -12,7 +12,7 @@ const Conversation = () => {
             </div>
 
             <div className="col-md-8 px-0 pl-4">
-                    <ShowChat />
+                <ShowChat />
             </div>
         </div>
   )
