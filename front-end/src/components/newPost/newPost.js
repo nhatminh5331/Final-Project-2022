@@ -53,11 +53,12 @@ const Createpost = () => {
 
       if(statusReducer.onEdit){
         dispatch(updatePost({postData, images, authReducer, statusReducer}))
+        dispatch({type: GLOBALTYPES.STATUS, payload: false})
       }else{
         dispatch(createPost({postData, images, authReducer}))
+        dispatch({type: GLOBALTYPES.STATUS, payload: false})
       }
   }
-
 
   useEffect(() => {
       if(statusReducer.onEdit){

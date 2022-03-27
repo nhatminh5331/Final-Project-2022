@@ -44,7 +44,10 @@ const postCtrl = {
 
             res.json({
                 msg: "Created new post !",
-                newPost
+                newPost: {
+                    ...newPost._doc,
+                    user: req.user
+                }
             })
 
         } catch (err) {
@@ -54,13 +57,18 @@ const postCtrl = {
     updatePost: async(req, res) =>{
         try {
             const {title, information, content, images, category} = req.body;
+
             if(!images) return res.status(400).json({msg: "Không có hình ảnh để cập nhật"})
 
             const updatePost = await Posts.findOneAndUpdate({_id: req.params.id}, {
                 title, information, content, images, category
-            })
+            }).populate("user", "avatar username")
 
-            res.json({msg: "Đã cập nhật bài viết", updatePost})
+            res.json({msg: "Đã cập nhật bài viết", 
+                      updatePost: {
+                          ...updatePost._doc,
+                          title, information, content, images, category
+                      }})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
