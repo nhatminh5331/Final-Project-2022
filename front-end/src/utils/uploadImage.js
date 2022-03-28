@@ -16,11 +16,10 @@ export const uploadImage = async (images) => {
     for(const item of images) {
         const formData = new FormData()
         formData.append("file", item)
-
         formData.append("upload_preset", "mdwmyot2")
         formData.append("cloud_name", "gamemortal")
 
-        const res = await fetch("https://api.cloudinary.com/v1_1/gamemortal/image/upload", {
+        const res = await fetch("https://api.cloudinary.com/v1_1/gamemortal/upload", {
             method: "POST",
             body: formData
         })

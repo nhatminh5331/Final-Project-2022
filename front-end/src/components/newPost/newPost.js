@@ -22,8 +22,8 @@ const Createpost = () => {
     files.forEach(file => {
       if(!file) return err = "File does not exist."
 
-      if(file.type !== 'image/jpeg' && file.type !== 'image/png'){
-        return err = "Image format is incorrect !"
+      if(file.size > 1024*1024*5) {
+        return err = "The maximum file size is 5mb"
       }
 
       if(file.size > 1024 * 1024 * 5){
@@ -32,6 +32,8 @@ const Createpost = () => {
 
       return newImages.push(file)
     })
+
+    console.log(files)
     if(err) dispatch({ type: GLOBALTYPES.NOTIFY, payload: {error: err} })
     setImages([...images, ...newImages])
 
@@ -67,6 +69,18 @@ const Createpost = () => {
       }
   }, [statusReducer])
 
+
+  const imgShow = (src) => {
+      return(
+          <img src={src} alt="images" className="img-thumbnail" />
+      )
+  }
+
+  const videoShow = (src) => {
+    return(
+        <video controls src={src} alt="images" className="img-thumbnail" />
+    )
+  }
 
     return (
         <div className="newPost">
@@ -115,9 +129,22 @@ const Createpost = () => {
                     {
                       images.map((img, index) => (
                           <div key={index} id="file_img" >
-                              <img src={img.url ? img.url : URL.createObjectURL(img)} 
-                              alt="images" className="img-thumbnail" />
-
+                              {
+                                  img.camera ? imgShow(img.camera)
+                                  : img.url 
+                                  ? <>
+                                        {
+                                          img.url.match(/video/i)
+                                          ? videoShow(img.url) : imgShow(img.url)
+                                        }
+                                    </>
+                                  : <>
+                                        {
+                                          img.type.match(/video/i)
+                                          ? videoShow(URL.createObjectURL(img)) : imgShow(URL.createObjectURL(img))
+                                        }
+                                    </>
+                              }
                               <span onClick={() => deleteImages(index)}>&times;</span>
 
                           </div>
@@ -131,7 +158,7 @@ const Createpost = () => {
                     <div className="file_upload">
                       <i className="fas fa-images"/>
                       <input type="file" name="file" id="file"
-                      multiple accept="image/*" onChange={handleChangeImage}/>
+                      multiple accept="image/*,video/*" onChange={handleChangeImage}/>
                     </div>
                     
                 </div>

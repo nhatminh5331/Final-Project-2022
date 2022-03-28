@@ -22,7 +22,12 @@ const listImage = ({images, id}) => {
           {
               images.map((img, index) => (
                 <div key={index} className={`carousel-item ${isActive(index)}`}>
-                  <img src={img.url} alt={img.url} />
+                  {
+                      img.url.match(/video/i)
+                      ? <video controls src={img.url} alt={img.url} />
+
+                      : <img src={img.url} alt={img.url} />
+                  }
                 </div>
               ))
           }
