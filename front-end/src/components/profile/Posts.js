@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ShowPost from './ShowPost'
 
-const Posts = ({id, authReducer, profileReducer, dispatch}) => {
+const Posts = ({id, profileReducer}) => {
     const [posts, setPosts] = useState([])
     const [result, setResult] = useState(4)
 

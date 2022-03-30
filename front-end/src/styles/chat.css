@@ -58,7 +58,7 @@
   width: 100%;
   height: calc(100% - 120px);
   padding: 5px 12px;
-  overflow-y: auto
+  overflow-y: auto;
 }
 .chat_showmessage{
   width: 100%;
@@ -97,7 +97,7 @@
 }
 
 .my_showmessage .chat_content{
-  background-color: rgb(103, 199, 255);
+  background-color: rgb(60, 184, 255);
   border-radius: 15px 0px 15px 15px
 }
 .chat_info{

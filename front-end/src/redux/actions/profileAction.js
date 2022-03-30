@@ -19,7 +19,7 @@ export const getProfileUsers = ({id}) => async (dispatch) => {
         try { 
             dispatch({type: PROFILE_TYPES.LOADING, payload: true})
 
-            const res = getDataAPI(`/user/${id}`)
+            const res = getDataAPI(`user/${id}`)
             const resDetail = getDataAPI(`user_post/${id}`)
 
             const users = await res

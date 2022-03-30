@@ -15,6 +15,16 @@ const chatReducer = (state = initialState, action) => {
                 ...state,
                 users: [action.payload, ...state.users]
             };
+        case CHAT_TYPES.CREATE_MESSAGE:
+            return{
+                ...state,
+                data: [...state.data, action.payload],
+                users: state.users.map(user => 
+                    user._id === action.payload.recipient || user.id === action.payload.sender
+                    ? {...user, text: action.payload.text}
+                    : user
+                )
+            };
         default:
             return state;
     }

@@ -1,5 +1,6 @@
 export const CHAT_TYPES = {
-    GET_INFO_USER: 'GET_INFO_USER'
+    GET_INFO_USER: 'GET_INFO_USER',
+    CREATE_MESSAGE: 'CREATE_MESSAGE',
 }
 
 export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
@@ -10,3 +11,10 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
         })
     }
 } 
+export const createMessage = ({message, authReducer}) => async (dispatch) => {
+    console.log(message)
+    dispatch({
+        type: CHAT_TYPES.CREATE_MESSAGE,
+        payload: message
+    })
+}

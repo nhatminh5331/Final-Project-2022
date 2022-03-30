@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ShowMessage = ({user}) => {
+const ShowMessage = ({user, msg}) => {
   return (
         <>
           <div className="chat_info">
@@ -8,12 +8,12 @@ const ShowMessage = ({user}) => {
               <span className="ml-1">{user.username}</span>
           </div>
 
-          <div className="chat_content">
-              Test message 123 asd
-          </div>
+          {
+            msg.text && <div className="chat_content">{msg.text}</div>
+          }
 
           <div className="chat_time">
-              25/3/2022
+              {new Date(msg.createdAt).toLocaleString()}
           </div>
         </>
   )

@@ -3,6 +3,7 @@ import DisplayUser from './DisplayUser'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ShowMessage from './ShowMessage'
+import {createMessage} from '../../redux/actions/chatAction.js'
 
 const ShowChat = () => {
 
@@ -21,6 +22,20 @@ const ShowChat = () => {
           }
     },[chatReducer.users, id])
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(!text.trim()) return;
+        setText('')
+
+        const message = {
+            sender: authReducer.userCurrent._id,
+            recipient: id,
+            text,
+            createdAt: new Date().toISOString(),
+        }
+        dispatch(createMessage({message, authReducer}))
+    }
+
     return (
         <>
             <div className="chat_header">
@@ -31,17 +46,30 @@ const ShowChat = () => {
 
             <div className="chat_container">
                 <div className="chat_showmessage">
-                    <div className="chat_row another_showmessage">
-                        <ShowMessage user={user} />
-                    </div>
+                    {
+                        chatReducer.data.map((msg, index) => (
+                            <div key={index}>
+                                {
+                                    msg.sender !== authReducer.userCurrent._id && 
+                                    <div className="chat_row another_showmessage">
+                                        <ShowMessage user={user} msg={msg} />
+                                    </div>      
+                                }
 
-                    <div className="chat_row my_showmessage">
-                        <ShowMessage user={authReducer.userCurrent} />
-                    </div>
+                                {
+                                    msg.sender === authReducer.userCurrent._id && 
+                                    <div className="chat_row my_showmessage">
+                                        <ShowMessage user={authReducer.userCurrent} msg={msg} />
+                                    </div>      
+                                }
+                            </div>
+                        ))
+                    }
+
                 </div>
             </div>
 
-            <form className="chat_input d-flex">
+            <form className="chat_input d-flex" onSubmit={handleSubmit}>
                 <input type="text" placeholder="Say something..." 
                 value={text} onChange={e => setText(e.target.value)}/>
 
