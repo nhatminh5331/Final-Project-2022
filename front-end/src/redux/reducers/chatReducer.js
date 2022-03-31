@@ -25,6 +25,12 @@ const chatReducer = (state = initialState, action) => {
                     : user
                 )
             };
+        case CHAT_TYPES.GET_USER_CONVERSATION:
+                return{
+                    ...state,
+                    users: action.payload.newArr,
+                    resultUsers: action.payload.result
+                };
         default:
             return state;
     }

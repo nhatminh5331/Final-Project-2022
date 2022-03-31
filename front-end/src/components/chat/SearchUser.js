@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import DisplayUser from './DisplayUser'
 import {getDataAPI} from '../../utils/fetchData'
 import {GLOBALTYPES} from '../../redux/actions/globalTypes'
 import {useHistory} from 'react-router-dom'
-import {getInfoUser} from '../../redux/actions/chatAction'
+import {getInfoUser, getUserConversation} from '../../redux/actions/chatAction'
+
 
 const SearchUser = () => {
   const [searchUser, setSearchUser] = useState('')
@@ -40,6 +41,10 @@ const SearchUser = () => {
       return history.push(`/chat/${user._id}`)
   }
 
+  useEffect(() => {
+      if(chatReducer.firstLoad) return;
+      dispatch(getUserConversation({authReducer}))
+  }, [chatReducer.firstLoad, dispatch, authReducer])
 
   return (
       <>
