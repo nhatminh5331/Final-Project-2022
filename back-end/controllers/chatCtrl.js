@@ -1,6 +1,20 @@
 const Chat = require('../models/chatModel')
 const Conversation = require('../models/conversationModel')
 
+class Chatfeatures {
+    constructor(query, queryString){
+        this.query = query;
+        this.queryString = queryString;
+    }
+
+    paginating(){
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 9
+        const skip = (page - 1) * limit
+        this.query = this.query.skip(skip).limit(limit)
+        return this;
+    }
+}
 
 const ChatCtrl = {
     createChat: async (req, res) => {
@@ -66,31 +80,27 @@ const ChatCtrl = {
     getChat: async (req, res) => {
         try {
 
-            //Filtering, Search
-            const queryObj = { ...req.query } 
-            const excludedFields = ['page', 'sort', 'limit']
-            excludedFields.forEach(el => delete queryObj[el])
+            // const queryObj = { ...req.query } 
+            // const excludedFields = ['page', 'sort', 'limit']
+            // excludedFields.forEach(el => delete queryObj[el])
 
-            let queryString = JSON.stringify(queryObj)
-            queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
-            let query = Chat.find({
-                $or: [
-                {sender: req.user._id, recipients: req.params.id},
-                {sender: req.params.id, recipients: req.user._id}
-            ]
-            })(JSON.parse(queryString))
-            // $or: [
-            //     {sender: req.user._id, recipients: req.params.id},
-            //     {sender: req.params.id, recipients: req.user._id}
-            // ]
+            // let queryString = JSON.stringify(queryObj)
+            // queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
+            // let query = Chat.find(JSON.parse(queryString))
               
-            //Pagination
-            const page = req.query.page * 1 || 1
-            const limit = req.query.limit * 1 || 9
-            const skip = (page - 1) * limit;
-            query = query.skip(skip).limit(limit);
+            // const page = req.query.page * 1 || 1
+            // const limit = req.query.limit * 1 || 9
+            // const skip = (page - 1) * limit;
+            // query = query.skip(skip).limit(limit);
 
-            const chat = await query.sort('-createdAt')
+            const feature = new Chatfeatures(Chat.find({
+                $or: [
+                    {sender: req.user._id, recipient: req.params.id},
+                    {sender: req.params.id, recipient: req.user._id}
+                ]
+            }), req.query).paginating()
+
+            const chat = await feature.query.sort('-createdAt')
             
             res.json({
                 chat,

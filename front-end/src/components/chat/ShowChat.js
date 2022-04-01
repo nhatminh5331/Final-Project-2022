@@ -3,7 +3,7 @@ import DisplayUser from './DisplayUser'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ShowMessage from './ShowMessage'
-import {createChat} from '../../redux/actions/chatAction.js'
+import {createChat, getChat} from '../../redux/actions/chatAction.js'
 
 const ShowChat = () => {
 
@@ -41,10 +41,9 @@ const ShowChat = () => {
             const getChatData = async () => {
                 await dispatch(getChat({authReducer, id}))
             }
-
             getChatData()
         }
-    }, [id, dispatch]);
+    }, [id, dispatch, authReducer]);
 
     return (
         <>

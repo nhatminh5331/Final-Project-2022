@@ -5,7 +5,6 @@ const initialState = {
     resultUsers: 0,
     data: [],
     resultData: 0,
-    firstLoad: false,
 }
 
 const chatReducer = (state = initialState, action) => {
@@ -15,7 +14,7 @@ const chatReducer = (state = initialState, action) => {
                 ...state,
                 users: [action.payload, ...state.users]
             };
-        case CHAT_TYPES.CREATE_MESSAGE:
+        case CHAT_TYPES.CREATE_CHAT:
             return{
                 ...state,
                 data: [...state.data, action.payload],
@@ -30,6 +29,12 @@ const chatReducer = (state = initialState, action) => {
                     ...state,
                     users: action.payload.newArr,
                     resultUsers: action.payload.result
+                };
+        case CHAT_TYPES.GET_CHAT:
+                return{
+                    ...state,
+                    data: action.payload.chat.reverse(),
+                    resultData: action.payload.result
                 };
         default:
             return state;

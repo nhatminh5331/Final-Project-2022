@@ -3,8 +3,9 @@ import { postDataAPI, getDataAPI } from '../../utils/fetchData'
 
 export const CHAT_TYPES = {
     GET_INFO_USER: 'GET_INFO_USER',
-    CREATE_MESSAGE: 'CREATE_MESSAGE',
-    GET_USER_CONVERSATION: 'GET_USER_CONVERSATION'
+    CREATE_CHAT: 'CREATE_CHAT',
+    GET_USER_CONVERSATION: 'GET_USER_CONVERSATION',
+    GET_CHAT: 'GET_CHAT',
 }
 
 export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
@@ -17,7 +18,7 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
 } 
 export const createChat = ({message, authReducer}) => async (dispatch) => {
     dispatch({
-        type: CHAT_TYPES.CREATE_MESSAGE,
+        type: CHAT_TYPES.CREATE_CHAT,
         payload: message
     })
     
@@ -61,6 +62,21 @@ export const getUserConversation = ({authReducer}) => async (dispatch) => {
         })
     }
 }
-export const getChat = ({}) => async (dispatch) => {
+export const getChat = ({authReducer, id}) => async (dispatch) => {
+    try {
+        const res = await getDataAPI(`chat/${id}`, authReducer.token)
+        console.log(res)
+        dispatch({
+            type: CHAT_TYPES.GET_CHAT, 
+            payload: res.data
+        })
 
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            }
+        })
+    }
 }

@@ -4,6 +4,6 @@ const User = require('../middleware/user')
 
 router.post('/chat', User, chatCtrl.createChat)
 router.get('/conversation', User, chatCtrl.getUserConversation)
-router.get('/chat', User, chatCtrl.getChat)
+router.get('/chat/:id', User, chatCtrl.getChat)
 
 module.exports = router
