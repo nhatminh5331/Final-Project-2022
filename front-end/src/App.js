@@ -20,6 +20,7 @@ import Chat from "./pages/chat/chat"
 import Conversation from "./pages/chat/conversation"
 import io from "socket.io-client"
 import {GLOBALTYPES} from "./redux/actions/globalTypes"
+import SocketClient from "./socketClient"
 
 function App() {
   const {authReducer, statusReducer} = useSelector(state => state)
@@ -44,6 +45,7 @@ function App() {
 
       {authReducer.token && <Header />}
       {statusReducer && <CreatePost />}
+      {authReducer.token && <SocketClient />}
 
       <div className="App">
         <div className="main">

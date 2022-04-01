@@ -3,15 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const fileUpload = require('express-fileupload')
+const SocketServer = require("./socketServer")
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use(fileUpload({
-  useTempFiles: true
-}));
 
 //Socket.io
 
@@ -19,7 +16,7 @@ const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
 io.on('connection',socket => {
-  console.log(socket.id + " is connected");
+  SocketServer(socket)
 })
 
 //Routes

@@ -11,7 +11,7 @@ const Chat = () => {
             </div>
 
             <div className="col-md-8 px-0">
-                    <h2>No user here</h2>
+                    <h2>Nothing here</h2>
             </div>
         </div>
   )
