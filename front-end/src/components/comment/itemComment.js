@@ -7,7 +7,7 @@ import './inputComment.css'
 
 const ItemComment = ({comment, post}) => {
 
-    const {authReducer} = useSelector(state => state) 
+    const {authReducer, socketReducer} = useSelector(state => state) 
     const dispatch = useDispatch()
 
     const [content, setContent] = useState('')
@@ -27,7 +27,7 @@ const ItemComment = ({comment, post}) => {
     }
 
     const handleDelete = () => {
-        dispatch(deleteComment({comment, post, authReducer}))
+        dispatch(deleteComment({comment, post, authReducer, socketReducer}))
     }
 
     const MenuComment = () => {

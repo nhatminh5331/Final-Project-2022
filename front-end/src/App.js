@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
       dispatch(refreshToken())
       const socket = io();
-      console.log(socket)
+      // console.log(socket)
       dispatch({type: GLOBALTYPES.SOCKET, payload: socket})
       return () => socket.close()
   },[dispatch])

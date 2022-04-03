@@ -6,7 +6,7 @@ import { createComment } from '../../redux/actions/commentAction'
 const InputComment = ({post}) => {
     const [content, setContent] = useState('')
 
-    const {authReducer} = useSelector(state => state)
+    const {authReducer, socketReducer} = useSelector(state => state)
     const dispatch = useDispatch()
 
 
@@ -20,7 +20,7 @@ const InputComment = ({post}) => {
             createdAt: new Date().toISOString()
         }
 
-        dispatch(createComment({post, newComment, authReducer}))
+        dispatch(createComment({post, newComment, authReducer, socketReducer}))
     }
 
     return (
