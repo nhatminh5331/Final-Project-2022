@@ -1,10 +1,12 @@
 .table_user{
     border-collapse: collapse;
     width: 100%;
+    margin-top: 30px; 
 }
 .table_user td,
 .table_user th{
     border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
     padding: 10px;
     min-width: 10px;
     text-align: center;
@@ -13,7 +15,7 @@
 .table_user th{
     padding-top: 12px;
     padding-bottom: 12px;
-    background: #555;
+    background: rgba(128, 70, 70, 0.788);
     color: white;
 }
 .table_user i{
@@ -24,5 +26,6 @@
     padding: 7px;
     color: white;
     font-size: 15px;
+    border-radius: 8px;
 }
 

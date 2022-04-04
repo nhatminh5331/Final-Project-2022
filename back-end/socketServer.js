@@ -1,6 +1,6 @@
-let users = []
+let users = [];
 
-const SocketServer = (socket) => {
+const SocketServer = socket => {
     // Connect and Disconnect Socket
     socket.on('johnUser', id => {
         users.push({id, socketID : socket.id})
@@ -12,20 +12,19 @@ const SocketServer = (socket) => {
     })
 
 
-
     // Comment Socket
     socket.on('createComment', newPost => {
         // console.log(newPost)
         
-        const ids = newPost.user._id
+        const ids = [newPost.user._id]
         const clients = users.filter(user => ids.includes(user.id))
+        // console.log(clients)
 
         if(clients.length > 0){
             clients.forEach(client => {
-                socket.to(`${client.socketID}`).emit('createCommentToClient', newPost)
+                socket.to(`${client.socketID}`).emit("createCommentToClient", newPost)
             })
         }
-
     })
 
     socket.on('deleteComment', newPost => {
@@ -39,6 +38,14 @@ const SocketServer = (socket) => {
             })
         }
 
+    })
+
+
+    // Chat Socket
+    socket.on("createChat", message => {
+        // console.log(message)
+        const user = users.find(user => user.id === message.recipient)
+        user && socket.to(`${user.socketID}`).emit("createChatToClient", message)
     })
 }
 

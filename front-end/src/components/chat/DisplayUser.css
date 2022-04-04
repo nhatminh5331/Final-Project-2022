@@ -5,9 +5,11 @@
     margin-right: 9%;
 }
 
-.display_user:active{
+.display_user:hover{
     background-color: #b3b3b3;
 }
+
+
 
 
 

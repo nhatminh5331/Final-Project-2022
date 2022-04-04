@@ -42,9 +42,8 @@ const SearchUser = () => {
   }
 
   useEffect(() => {
-      if(chatReducer.firstLoad) return;
       dispatch(getUserConversation({authReducer}))
-  }, [chatReducer.firstLoad, dispatch, authReducer])
+  }, [dispatch, authReducer])
 
   return (
       <>

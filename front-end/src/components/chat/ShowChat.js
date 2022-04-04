@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import DisplayUser from './DisplayUser'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -7,13 +7,15 @@ import {createChat, getChat} from '../../redux/actions/chatAction.js'
 
 const ShowChat = () => {
 
-    const {authReducer, chatReducer} = useSelector(state => state)
+    const {authReducer, chatReducer, socketReducer} = useSelector(state => state)
     const dispatch = useDispatch()
 
     const {id} = useParams()
 
     const [user, setUser] = useState([])
     const [text, setText] = useState('')
+
+    const refChat = useRef()
 
     useEffect(() => {
         const newUser = chatReducer.users.find(user => user._id === id)
@@ -22,10 +24,9 @@ const ShowChat = () => {
           }
     },[chatReducer.users, id])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if(!text.trim()) return;
-        setText('')
 
         const message = {
             sender: authReducer.userCurrent._id,
@@ -33,13 +34,19 @@ const ShowChat = () => {
             text,
             createdAt: new Date().toISOString(),
         }
-        dispatch(createChat({message, authReducer}))
+        await dispatch(createChat({message, authReducer, socketReducer}))
+        if(refChat.current){
+            refChat.current.scrollIntoView({behavior: 'smooth', block: 'end'})
+        }
     }
 
     useEffect(() => {
         if(id){
             const getChatData = async () => {
                 await dispatch(getChat({authReducer, id}))
+                if(refChat.current){
+                    refChat.current.scrollIntoView({behavior: 'smooth', block: 'end'})
+                }
             }
             getChatData()
         }
@@ -54,7 +61,10 @@ const ShowChat = () => {
             </div>
 
             <div className="chat_container">
-                <div className="chat_showmessage">
+                <div className="chat_showmessage" ref={refChat}>
+
+                    
+
                     {
                         chatReducer.data.map((msg, index) => (
                             <div key={index}>

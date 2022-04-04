@@ -2,26 +2,31 @@
     background-color: #f0f0f0;
     width: fit-content;
     margin: 2.5rem auto 4rem auto;
-    padding: 0.5rem;
-    border-radius: 5px;
+    padding: 0.6rem;
+    border-radius: 10px;
   }
   
   .searchBar-wrap form {
     display: flex;
     align-items: center;
+    margin: 0 0.4rem 0rem 0.4rem;
   }
   
   .searchBar-wrap input {
-    background-color: #f0f0f0;
+    background-color: #fff;
     border: none;
     outline:none;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 10px;
+    width: 240px;
   }
   
   .searchBar-wrap button {
     outline:none;
     border: none;
-    padding: 0.3rem 0.7rem 0 0.7rem;
-    border-radius: 5px;
+    padding: 0.3rem 0.3rem 0 0.3rem;
+    border-radius: 25px;
     background-color: #3e6cb3;
     color: #fff;
   }

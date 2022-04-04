@@ -27,7 +27,7 @@ const PostItem = ({post}) => {
           <div className="d-flex">
             <img src={post.user.avatar} alt={post.user.avatar} className="small-avatar"/> 
             <h6>
-              <Link to={`/profile/${post.user._id}`} className="text-dark">
+              <Link to={`/profile/${post.user._id}`} style={{ textDecoration: 'none' }} className="text-dark">
                   {post.user.username}
               </Link>
             </h6>
@@ -66,7 +66,7 @@ const PostItem = ({post}) => {
 
         <h3>{post.title}</h3>
         
-      <Link to={`/post/${post._id}`}>
+      <Link to={`/post/${post._id}`} style={{ textDecoration: 'none' }}>
       <p className='info'>{post.information}</p>
       </Link>
 

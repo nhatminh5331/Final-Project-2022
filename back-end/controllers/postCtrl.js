@@ -101,11 +101,22 @@ const postCtrl = {
             .populate({
                 path: "comments",
                 populate: {
-                    path: "user"
+                    path: "user",
+                    select: "-password"
                 }
             })
 
             res.json({getDetailPost})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    searchPost: async (req, res) => {
+        try {
+            const posts = await Posts.find({title: {$regex: req.query.title}})
+            .limit(5).select("title category images")
+            
+            res.json({posts})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }

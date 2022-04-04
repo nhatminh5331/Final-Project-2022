@@ -14,4 +14,7 @@ router.route('/post/:id')
 router.route('/user_post/:id')
     .get(postCtrl.getUserPost)
 
+router.route('/search_post') 
+    .get(User, postCtrl.searchPost)
+
 module.exports = router

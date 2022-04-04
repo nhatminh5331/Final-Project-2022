@@ -16,11 +16,13 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
         })
     }
 } 
-export const createChat = ({message, authReducer}) => async (dispatch) => {
+export const createChat = ({message, authReducer, socketReducer}) => async (dispatch) => {
     dispatch({
         type: CHAT_TYPES.CREATE_CHAT,
         payload: message
     })
+    
+    socketReducer.emit("createChat", message)
     
     try {
         await postDataAPI('chat', message, authReducer.token)
@@ -65,7 +67,7 @@ export const getUserConversation = ({authReducer}) => async (dispatch) => {
 export const getChat = ({authReducer, id}) => async (dispatch) => {
     try {
         const res = await getDataAPI(`chat/${id}`, authReducer.token)
-        console.log(res)
+        
         dispatch({
             type: CHAT_TYPES.GET_CHAT, 
             payload: res.data
