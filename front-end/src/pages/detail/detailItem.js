@@ -29,7 +29,7 @@ const PostItem = ({ post }) => {
           <div className="d-flex">
             <img src={post.user.avatar} alt="cover" className="small-avatar"/> 
             <h6>
-              <Link to={`/profile/${post.user._id}`} className="text-dark">
+              <Link to={`/profile/${post.user._id}`} style={{ textDecoration: 'none' }} className="text-dark">
                   {post.user.username}
               </Link>
             </h6>
@@ -37,22 +37,23 @@ const PostItem = ({ post }) => {
 
           <div className="nav-item dropdown">
 
-          {authReducer.userCurrent._id === post.user._id && 
-            <>
-              <span className="material-icons" id="moreLink" data-toggle="dropdown">
-                more_horiz
-              </span>
+          {
+            (authReducer.userCurrent._id === post.user._id || authReducer.userCurrent.role === 1) && 
+              <>
+                <span className="material-icons" id="moreLink" data-toggle="dropdown">
+                  more_horiz
+                </span>
 
-              <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={handleEditPost}>
-                      <span className="material-icons">create</span> Edit Post
-                    </div>
-                    <div className="dropdown-item" onClick={handleDeletePost}>
-                      <span className="material-icons">delete_outline</span> Delete
-                      Post
-                    </div>
-              </div>
-            </>
+                <div className="dropdown-menu">
+                      <div className="dropdown-item" onClick={handleEditPost}>
+                        <span className="material-icons">create</span> Edit Post
+                      </div>
+                      <div className="dropdown-item" onClick={handleDeletePost}>
+                        <span className="material-icons">delete_outline</span> Delete
+                        Post
+                      </div>
+                </div>
+              </>
           }
           </div>
         </div>

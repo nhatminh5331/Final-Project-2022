@@ -4,6 +4,12 @@
     border-radius: 10px;
 }
 
+.display_post video{
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+}
+
 .posts{
     position: absolute;
     margin-top: 8px;
@@ -20,5 +26,5 @@
 }
 
 .display_post:hover{
-    background-color: #ddd;
+    background-color: #fff;
 }

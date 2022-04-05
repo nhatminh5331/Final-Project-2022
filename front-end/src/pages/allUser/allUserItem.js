@@ -13,7 +13,7 @@ const AllUserItem = ({users}) => {
             </td>
 
             <td>
-              <Link to={`/profile/${users._id}`} className="text-dark">
+              <Link to={`/profile/${users._id}`} style={{ textDecoration: 'none' }} className="text-dark">
                 {users.username}
               </Link>
             </td>

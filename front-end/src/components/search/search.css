@@ -3,7 +3,7 @@
     width: fit-content;
     margin: 2.5rem auto 4rem auto;
     padding: 0.6rem;
-    border-radius: 10px;
+    border-radius: 12px;
   }
   
   .searchBar-wrap form {
@@ -18,7 +18,7 @@
     outline:none;
     margin-right: 1rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
-    border-radius: 10px;
+    border-radius: 30px;
     width: 240px;
   }
   

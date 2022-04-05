@@ -17,10 +17,10 @@ const PostItem = ({post}) => {
   }
 
   const handleDeletePost = () => {
-    if(window.confirm('Are you sure want to delete ?'))
+    if(window.confirm('Are you sure want to delete post ?'))
       dispatch(deletePost({post, authReducer}))
   }
-  
+
   return (
     <div className='postItem-wrap'>
         <div className="header">
@@ -34,23 +34,24 @@ const PostItem = ({post}) => {
           </div>
 
             <div className='nav-item dropdown'>
-              {authReducer.userCurrent._id === post.user._id &&
-                <>
+              {
+                (authReducer.userCurrent._id === post.user._id || authReducer.userCurrent.role === 1)  &&
+                  <>
 
-                  <span className="material-icons" id="moreLink" data-toggle="dropdown">
-                    more_horiz
-                  </span>
+                    <span className="material-icons" id="moreLink" data-toggle="dropdown">
+                      more_horiz
+                    </span>
 
-                  <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={handleEditPost}>
-                      <span className="material-icons">create</span> Edit Post
+                    <div className="dropdown-menu">
+                      <div className="dropdown-item" onClick={handleEditPost}>
+                        <span className="material-icons">create</span> Edit Post
+                      </div>
+                      <div className="dropdown-item" onClick={handleDeletePost}>
+                        <span className="material-icons">delete_outline</span> Delete Post
+                      </div>
                     </div>
-                    <div className="dropdown-item" onClick={handleDeletePost}>
-                      <span className="material-icons">delete_outline</span> Delete Post
-                    </div>
-                  </div>
 
-                </>
+                  </>
               }
             </div>
         </div>

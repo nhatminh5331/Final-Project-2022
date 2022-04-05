@@ -28,16 +28,16 @@ const Header = () => {
           }>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li>
-              <Link to="/chat">Chat</Link>
+              <Link to="/chat" style={{ textDecoration: 'none' }}>Chat</Link>
             </li>
             <li>
               { 
                 authReducer.userCurrent.role === 1 
-                ? <Link to="/all_user">Manage user</Link>
-                : <Link to="/profile/6203778bbb1c830340d98358">About</Link>
+                ? <Link to="/all_user" style={{ textDecoration: 'none' }}>Manage user</Link>
+                : <Link to="/profile/6203778bbb1c830340d98358" style={{ textDecoration: 'none' }}>About</Link>
               }
             </li>
           </ul>

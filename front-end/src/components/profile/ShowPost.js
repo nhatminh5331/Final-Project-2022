@@ -11,7 +11,13 @@ const ShowPost = ({posts, result}) => {
                 posts.map(post =>(
                     <Link key={post._id} to={`/post/${post._id}`}>
                         <div className="showPost_display">
-                            <img src={post.images[0].url} alt={post.images[0].url} />
+                            {
+                                post.images[0].url.match(/video/i)
+
+                              ?  <video controls src={post.images[0].url} alt={post.images[0].url}/>
+                              
+                              :  <img src={post.images[0].url} alt={post.images[0].url}/>
+                            }
 
                             <div className="showPost_comment">
                                 <i className="far fa-comment"> {post.comments.length}</i>

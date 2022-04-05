@@ -7,7 +7,7 @@ const DisplayUser = ({user, children}) => {
   return (
       <div className="display_user d-flex p-2 align-items-center justify-content-between">
         <Link to={`/profile/${user._id}`} style={{ textDecoration: 'none' }} className="d-flex align-items-center">
-          <img src={user.avatar} alt="avatar" className="small-avatar" />
+          <img src={user.avatar} alt="Loading..." className="small-avatar" />
           <h6 className="text-dark ml-2 mt-2">{user.username}</h6>
         </Link>
 
