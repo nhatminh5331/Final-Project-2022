@@ -10,7 +10,7 @@ const Introduce = () => {
 
     return(
       <div className='home-header'>
-        <div className='status my-4'>
+        <div className='status my-8'>
         <img src={authReducer.userCurrent.avatar} alt="avatar" className="small-avatar" />
           <button className='statusBtn'
           onClick={() => dispatch({type: GLOBALTYPES.STATUS, payload: true})}>

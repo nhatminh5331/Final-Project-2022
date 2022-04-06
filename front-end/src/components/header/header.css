@@ -4,11 +4,15 @@ li {
 
 .main-nav {
   width: 100%;
-  height: 6rem;
+  top: 0;
+  height: 5rem;
   display: grid;
-  grid-template-columns: 9rem 1fr 2fr 1fr 9rem;
+  grid-template-columns: 8.8rem 1fr 1fr 1fr 9rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 100px -90px,
-rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
+rgba(0, 0, 0, 0.3) 0px 24px 20px -30px;
+  background-color: #fff;
+  position: fixed;
+  z-index: 10;
 }
 
 .logo {
@@ -16,7 +20,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
   grid-column: 2/3;
   justify-content: start;
   align-items: center;
-  height: 5rem
+  height: 4rem
 }
 
 .menu-link {
@@ -24,7 +28,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 }
 
 .menu-link ul {
-  height: 6rem;
+  height: 5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -35,43 +39,50 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 }
 
 .user-profile li {
-  text-align: center;
+  text-align: end;
 }
 
 .user-profile .dropdown-menu.show {
-    margin-left: 80px;
+    margin-left: 50%;
 }
 
 @media (max-width: 1280px) {
     .user-profile .dropdown-menu.show {
-        margin-left: 50px;
+        margin-left: 100px;
     }
 }
 
 @media (max-width: 1080px) {
     .user-profile .dropdown-menu.show {
-        margin-left: 40px;
+        margin-left: 60px;
     }
 }
 
 /* ----------- Grid part ends ----------------- */
 
 .logo  {
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 500;
   text-transform: uppercase;
-  background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(50, 32, 255));
+  background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(21, 0, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .logo span {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
 }
 
 .menu-link ul li {
   font-size: 1.3rem;
   font-weight: 500;
+  padding: 1rem 2.6rem 1rem 2.6rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.menu-link ul li:hover {
+  background-color: #ddd;
 }
 
 .menu-link ul li a {
@@ -94,6 +105,10 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
   display: none;
 }
 
+.user-profile li {
+  margin-top: -12px;
+}
+
 .user-profile .hello {
   font-weight: 500;
   font-size: 1.2rem;
@@ -101,57 +116,37 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 
 @media (max-width: 1270px) {
   .user-profile .hello {
-    font-size: 1rem;
-  }
-  .menu-link ul li {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 1155px) {
   .user-profile .hello {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 1097px) {
-  .user-profile .hello {
-    font-size: 0.8rem;
-  }
   .menu-link ul li {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 }
 
 /* responsive css style  */
 @media (max-width: 1080px) {
   .main-nav {
-    height: 6rem;
-    grid-template-columns: 6rem 1fr 2fr 1fr 6rem;
-  }
-
-  .logo{
-    height: 5rem;
-  }
-
-  .menu-link ul {
-    height: 6rem;
+    grid-template-columns: 7rem 1fr 1fr 1fr 6rem;
   }
 }
 
 /* responsive css style  */
 @media (max-width: 998px) {
   .main-nav {
-    height: 6rem;
-    grid-template-columns: 5rem 2fr 1fr 2rem 3rem;
+    grid-template-columns: 7rem 1fr 1fr 1fr 5rem;
   }
 
   .menu-link {
     display: none;
-  }
-
-  .user-profile ul {
-    height: 6rem;
   }
 
   .mobile-menu-link {
@@ -161,20 +156,20 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
   }
 
   .mobile-menu-link {
-    background-color: white;
-    height: 17rem;
+    background-color: rgb(255, 255, 255);
+    height: 14.8rem;
     display: grid;
-    grid-column: 2/5;
+    grid-column: 3/5;
     align-items: center;
     padding-left: 3rem;
     transition: all 2s linear;
     transform-origin: top;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 25px -20px,
+      rgba(0, 0, 0, 0.3) 0px 10px 90px -30px;
   }
 
   .mobile-menu-link ul {
-    height: 17rem;
+    height: 14.5rem;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -208,6 +203,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
   .user-profile .hamburger-menu {
     display: block;
     font-size: 2.5rem;
+    height: 4.5rem;
   }
 
   .user-profile .dropdown-menu.show {
@@ -217,12 +213,7 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
 
 @media (max-width: 798px) {
   .main-nav {
-    height: 6rem;
-    grid-template-columns: 4rem 2fr 1fr 2fr 3rem;
-  }
-
-  .user-profile ul {
-    height: 6rem;
+    grid-template-columns: 4rem 1fr 1fr 1fr 4rem;
   }
 
   .user-profile {
@@ -240,32 +231,4 @@ rgba(0, 0, 0, 0.3) 0px 20px 20px -30px;
   .user-profile .hello {
     display: none;
   }
-}
-
-@media (max-width: 520px) {
-  .main-nav {
-    height: 6rem;
-    grid-template-columns: 3rem 2fr 1fr 2fr 2rem;
-  }
-
-  .user-profile ul {
-    height: 6rem;
-  }
-
-  .logo h2 {
-    font-size: 1.6rem;
-  }
-
-  .user-profile {
-    height: 5rem;
-    display: flex;
-    justify-self: end;
-    align-items: center;
-  }
-
-  .user-profile .hamburger-menu {
-    display: block;
-    font-size: 2.5rem;
-  }
-
 }

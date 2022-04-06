@@ -28,16 +28,16 @@ const Header = () => {
           }>
           <ul>
             <li>
-              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
-            </li>
+              <Link to="/"><box-icon size='34px' color='#464646' name='home'></box-icon></Link>
+            </li>                                               
             <li>
-              <Link to="/chat" style={{ textDecoration: 'none' }}>Chat</Link>
+              <Link to="/chat"><box-icon size='34px' color='#464646' name='chat'></box-icon></Link>
             </li>
             <li>
               { 
                 authReducer.userCurrent.role === 1 
-                ? <Link to="/all_user" style={{ textDecoration: 'none' }}>Manage user</Link>
-                : <Link to="/profile/6203778bbb1c830340d98358" style={{ textDecoration: 'none' }}>About</Link>
+                ? <Link to="/all_user"><box-icon size='34px' color='#464646' name='user'></box-icon></Link>
+                : <Link to="/profile/6203778bbb1c830340d98358"><box-icon size='34px' color='464646' name='user'></box-icon></Link>
               }
             </li>
           </ul>
@@ -47,7 +47,7 @@ const Header = () => {
             <li className="nav-item dropdown">
               <span className="nav-link " href="1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src={authReducer.userCurrent.avatar} alt="avatar" className="small-avatar" />
-                  <span className="hello"> Hello, {authReducer.userCurrent.username}</span> 
+                  <span className="hello"> Hi, {authReducer.userCurrent.username}</span> 
               </span>
 
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">

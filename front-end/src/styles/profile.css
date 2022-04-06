@@ -3,7 +3,7 @@
 .info{
     width: 100%;
     max-width: 750px;
-    margin: auto;
+    margin: 6.8rem auto 0 auto;
     padding: 45px 15px;
 }
 .info_container{
@@ -40,7 +40,7 @@
     width: 100%;
     height: 100vh;
     background: #0008;
-    z-index: 9;
+    z-index: 11;
     overflow: auto;
 }
 .editProfile form{
