@@ -1,7 +1,31 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux"
+import {GLOBALTYPES} from "../../redux/actions/globalTypes"
+import {deleteDataAPI} from '../../utils/fetchData'
 
 const AllUserItem = ({users}) => {
+
+  const {authReducer} = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  const handleDelete = async (id) => {
+      try {
+          if(window.confirm("Do you really want to delete this user?"))
+          {
+            await deleteDataAPI(`delete/${id}`, authReducer.token)
+          }
+
+      } catch (err) {
+        dispatch({
+          type: GLOBALTYPES.NOTIFY, 
+          payload: {
+              error: err.response.data.msg
+          }
+      })
+      }
+  }
+
   return (
           <>
             <td>{users._id}</td>
@@ -23,7 +47,7 @@ const AllUserItem = ({users}) => {
             <td>
               {
                 users.role === 0
-                ? <i className="fas fa-trash-alt" title="Remove"></i>
+                ? <i className="fas fa-trash-alt" title="Remove" onClick={() => handleDelete(users._id)}></i>
                 : <>
                     <p>Admin</p>
                   </>

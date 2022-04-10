@@ -10,10 +10,14 @@ const initialState = {
 const chatReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHAT_TYPES.GET_INFO_USER:
+            if(state.users.every(info => info._id !== action.payload._id)){
             return{
                 ...state,
                 users: [action.payload, ...state.users]
             };
+        }
+        return state;
+
         case CHAT_TYPES.CREATE_CHAT:
             return{
                 ...state,

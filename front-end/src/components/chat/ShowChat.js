@@ -16,12 +16,15 @@ const ShowChat = () => {
     const [text, setText] = useState('')
 
     const refChat = useRef()
+    const pageMore = useRef()
+
+    const [page, setPage] = useState(0)
 
     useEffect(() => {
         const newUser = chatReducer.users.find(user => user._id === id)
-          if(newUser){
-              setUser(newUser)
-          }
+          if(newUser)
+            setUser(newUser)
+          
     },[chatReducer.users, id])
 
     const handleSubmit = async (e) => {
@@ -43,6 +46,7 @@ const ShowChat = () => {
     useEffect(() => {
         if(id){
             const getChatData = async () => {
+                setPage(1)
                 await dispatch(getChat({authReducer, id}))
                 if(refChat.current){
                     refChat.current.scrollIntoView({behavior: 'smooth', block: 'end'})
@@ -51,6 +55,24 @@ const ShowChat = () => {
             getChatData()
         }
     }, [id, dispatch, authReducer]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting){
+                setPage(p => p + 1)
+            }
+        },{
+            threshold: 0.1
+        })
+
+        observer.observe(pageMore.current)
+    }, [setPage])
+
+    useEffect(() => {
+        if(chatReducer.resultData >= (page - 1) * 9 && page > 1){
+            dispatch(getChat({authReducer, id, page}))
+        }
+    }, [id, authReducer, page, dispatch, chatReducer.resultData])
 
     return (
         <>
@@ -62,8 +84,9 @@ const ShowChat = () => {
 
             <div className="chat_container">
                 <div className="chat_showmessage" ref={refChat}>
-
-                    
+                    <button style={{marginTop:'-18px', opacity: 0}} ref={pageMore}>
+                        More
+                    </button>
 
                     {
                         chatReducer.data.map((msg, index) => (

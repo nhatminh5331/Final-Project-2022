@@ -9,4 +9,6 @@ router.patch('/user', User, userCtrl.updateUser)
 router.get('/all_user', User, Admin, userCtrl.getAllUser)
 router.get('/search_user', User, userCtrl.searchUser)
 
+router.delete('/delete/:id', User, Admin, userCtrl.deleteUser)
+
 module.exports = router

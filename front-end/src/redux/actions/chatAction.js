@@ -17,12 +17,15 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
     }
 } 
 export const createChat = ({message, authReducer, socketReducer}) => async (dispatch) => {
+    console.log(message)
     dispatch({
         type: CHAT_TYPES.CREATE_CHAT,
         payload: message
     })
+
+    const { _id, username, avatar } = authReducer.userCurrent
     
-    socketReducer.emit("createChat", message)
+    socketReducer.emit("createChat", {...message, user: {_id, username, avatar}})
     
     try {
         await postDataAPI('chat', message, authReducer.token)
@@ -40,11 +43,11 @@ export const getUserConversation = ({authReducer}) => async (dispatch) => {
     try {
         const res = await getDataAPI('conversation', authReducer.token)
 
-        let newArr = []
+        let newArr = [];
 
         res.data.conversation.forEach(item => {
             item.recipients.forEach(info => {
-                if(info.id !== authReducer.userCurrent._id){
+                if(info._id !== authReducer.userCurrent._id){
                     newArr.push({...info, text: item.text})
                 }
             })
@@ -64,9 +67,9 @@ export const getUserConversation = ({authReducer}) => async (dispatch) => {
         })
     }
 }
-export const getChat = ({authReducer, id}) => async (dispatch) => {
+export const getChat = ({authReducer, id, page = 1}) => async (dispatch) => {
     try {
-        const res = await getDataAPI(`chat/${id}`, authReducer.token)
+        const res = await getDataAPI(`chat/${id}?limit=${page * 9}`, authReducer.token)
         
         dispatch({
             type: CHAT_TYPES.GET_CHAT, 
