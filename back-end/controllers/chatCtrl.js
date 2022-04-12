@@ -100,6 +100,14 @@ const ChatCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    deleteChat: async (req, res) => {
+        try {
+            await Chat.findOneAndDelete({_id: req.params.id, sender: req.user._id})
+            res.json({msg: "Delete Message  Success !"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
 }
 
 module.exports = ChatCtrl

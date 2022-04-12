@@ -1,6 +1,17 @@
 import React from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {deleteChat} from '../../redux/actions/chatAction'
 
 const ShowMessage = ({user, msg}) => {
+  // console.log(msg)
+
+  const {authReducer} = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  const handleDeleteMsg = () => {
+      dispatch(deleteChat({msg, authReducer}))
+  }
+
   return (
         <>
           <div className="chat_info">
@@ -8,9 +19,27 @@ const ShowMessage = ({user, msg}) => {
               <span className="ml-1">{user.username}</span>
           </div>
 
-          {
-            msg.text && <div className="chat_content">{msg.text}</div>
-          }
+          <div className="my_text">
+            {
+              user._id === authReducer.userCurrent._id && <i className="fas fa-trash-alt mr-2 text-danger" onClick={handleDeleteMsg} />
+            }
+              <div>
+                {
+                  msg.text && <div className="chat_content">{msg.text}</div>
+                }
+                {
+                  msg.media.map((item, index) => (
+                    <div key={index}>
+                        {
+                          item.url.match(/video/i) 
+                          ? <video controls src={item.url} alt={item.url} />
+                          : <img src={item.url} alt={item.url} />
+                        }
+                    </div>
+                  ))
+                }
+              </div>
+          </div>
 
           <div className="chat_time">
               {new Date(msg.createdAt).toLocaleString()}

@@ -10,14 +10,10 @@ const initialState = {
 const chatReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHAT_TYPES.GET_INFO_USER:
-            if(state.users.every(info => info._id !== action.payload._id)){
             return{
                 ...state,
                 users: [action.payload, ...state.users]
-            };
         }
-        return state;
-
         case CHAT_TYPES.CREATE_CHAT:
             return{
                 ...state,
@@ -40,6 +36,15 @@ const chatReducer = (state = initialState, action) => {
                     data: action.payload.chat.reverse(),
                     resultData: action.payload.result
                 };
+        case CHAT_TYPES.DELETE_CHAT:
+                return{
+                    ...state,
+                    data: state.data.map(item => 
+                        item._id === action.payload._id
+                        ? {...item, messages: action.payload.data}
+                        : item
+                    )
+                };    
         default:
             return state;
     }

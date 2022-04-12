@@ -1,11 +1,12 @@
-import { GLOBALTYPES } from './globalTypes'
-import { postDataAPI, getDataAPI } from '../../utils/fetchData'
+import { GLOBALTYPES, DeleteData } from './globalTypes'
+import { postDataAPI, getDataAPI, deleteDataAPI } from '../../utils/fetchData'
 
 export const CHAT_TYPES = {
     GET_INFO_USER: 'GET_INFO_USER',
     CREATE_CHAT: 'CREATE_CHAT',
     GET_USER_CONVERSATION: 'GET_USER_CONVERSATION',
     GET_CHAT: 'GET_CHAT',
+    DELETE_CHAT: 'DELETE_CHAT'
 }
 
 export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
@@ -17,7 +18,7 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
     }
 } 
 export const createChat = ({message, authReducer, socketReducer}) => async (dispatch) => {
-    console.log(message)
+    // console.log(message)
     dispatch({
         type: CHAT_TYPES.CREATE_CHAT,
         payload: message
@@ -76,6 +77,23 @@ export const getChat = ({authReducer, id, page = 1}) => async (dispatch) => {
             payload: res.data
         })
 
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            }
+        })
+    }
+}
+export const deleteChat = ({msg, authReducer}) => async (dispatch) => {
+    const data = DeleteData(msg._id)
+    dispatch({
+        type: CHAT_TYPES.DELETE_CHAT, 
+        payload: {data, _id: msg.recipients}}) 
+    
+    try {
+        await deleteDataAPI(`chat/${msg._id}`, authReducer.token)
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.NOTIFY, 
