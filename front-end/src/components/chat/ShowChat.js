@@ -23,6 +23,15 @@ const ShowChat = () => {
     const [page, setPage] = useState(0)
     const [media, setMedia] = useState([])
 
+    // const [data, setData] = useState([])
+
+    // useEffect(() => {
+    //     const newData = chatReducer.data.find(item => item._id === id)
+    //     console.log(newData)
+    //    if(newData){
+    //         setData(newData.chat)
+    //     } 
+    // }, [id, chatReducer.data])
     
     useEffect(() => {
         const newUser = chatReducer.users.find(user => user._id === id)

@@ -68,20 +68,7 @@ const ChatCtrl = {
     },
     getChat: async (req, res) => {
         try {
-
-            // const queryObj = { ...req.query } 
-            // const excludedFields = ['page', 'sort', 'limit']
-            // excludedFields.forEach(el => delete queryObj[el])
-
-            // let queryString = JSON.stringify(queryObj)
-            // queryString = queryString.replace(/\b(gte|gt|lte|lt|regex)\b/g, match => '$' + match)
-            // let query = Chat.find(JSON.parse(queryString))
-              
-            // const page = req.query.page * 1 || 1
-            // const limit = req.query.limit * 1 || 9
-            // const skip = (page - 1) * limit;
-            // query = query.skip(skip).limit(limit);
-
+            
             const feature = new Chatfeatures(Chat.find({
                 $or: [
                     {sender: req.user._id, recipient: req.params.id},

@@ -39,11 +39,8 @@ const chatReducer = (state = initialState, action) => {
         case CHAT_TYPES.DELETE_CHAT:
                 return{
                     ...state,
-                    data: state.data.map(item => 
-                        item._id === action.payload._id
-                        ? {...item, messages: action.payload.data}
-                        : item
-                    )
+                    data: action.payload.newData,
+                    resultData: action.payload.newData.length
                 };    
         default:
             return state;

@@ -3,13 +3,13 @@ import {useSelector, useDispatch} from 'react-redux'
 import {deleteChat} from '../../redux/actions/chatAction'
 
 const ShowMessage = ({user, msg}) => {
-  // console.log(msg)
 
-  const {authReducer} = useSelector(state => state)
+  const {authReducer, chatReducer} = useSelector(state => state)
   const dispatch = useDispatch()
 
   const handleDeleteMsg = () => {
-      dispatch(deleteChat({msg, authReducer}))
+    if(chatReducer.data)
+      dispatch(deleteChat({msg, authReducer, chatReducer}))
   }
 
   return (
