@@ -6,7 +6,8 @@ export const CHAT_TYPES = {
     CREATE_CHAT: 'CREATE_CHAT',
     GET_USER_CONVERSATION: 'GET_USER_CONVERSATION',
     GET_CHAT: 'GET_CHAT',
-    DELETE_CHAT: 'DELETE_CHAT'
+    DELETE_CHAT: 'DELETE_CHAT',
+    DELETE_CONVERSATION: 'DELETE_CONVERSATION',
 }
 
 export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
@@ -18,15 +19,12 @@ export const getInfoUser = ({user, chatReducer}) => (dispatch) => {
     }
 } 
 export const createChat = ({message, authReducer, socketReducer}) => async (dispatch) => {
-    // console.log(message)
     dispatch({
         type: CHAT_TYPES.CREATE_CHAT,
         payload: message
     })
 
-    const { _id, username, avatar } = authReducer.userCurrent
-    
-    socketReducer.emit("createChat", {...message, user: {_id, username, avatar}})
+    socketReducer.emit("createChat", {...message})
     
     try {
         await postDataAPI('chat', message, authReducer.token)
@@ -94,6 +92,22 @@ export const deleteChat = ({msg, authReducer, chatReducer}) => async (dispatch) 
     
     try {
         await deleteDataAPI(`chat/${msg._id}`, authReducer.token)
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.NOTIFY, 
+            payload: {
+                error: err.response.data.msg
+            }
+        })
+    }
+}
+export const deleteConversation = ({authReducer, id}) => async (dispatch) => {
+    dispatch({
+        type: CHAT_TYPES.DELETE_CONVERSATION,
+        payload: id
+    })
+    try {
+        await deleteDataAPI(`conversation/${id}`, authReducer.token)
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.NOTIFY, 

@@ -94,7 +94,21 @@ const ChatCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+    deleteConversation: async (req, res) => {
+        try {
+            const newConversation = await Conversation.findOneAndDelete({
+                $or: [
+                    {recipients: [req.user._id, req.params.id]},
+                    {recipients: [req.params.id, req.user._id]}
+                ]
+            })
+            await Chat.deleteMany({conversation: newConversation._id})
+            res.json({msg: "Delete Conversation Success !"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 }
 
 module.exports = ChatCtrl

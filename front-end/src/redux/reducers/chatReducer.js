@@ -1,4 +1,5 @@
 import { CHAT_TYPES } from "../actions/chatAction";
+import {DeleteData} from "../actions/globalTypes"
 
 const initialState = {
     users: [],
@@ -41,7 +42,13 @@ const chatReducer = (state = initialState, action) => {
                     ...state,
                     data: action.payload.newData,
                     resultData: action.payload.newData.length
-                };    
+                };  
+        case CHAT_TYPES.DELETE_CONVERSATION:
+                return{
+                    ...state,
+                    users: DeleteData(state.users, action.payload),
+                    data: DeleteData(state.data, action.payload)
+               };   
         default:
             return state;
     }

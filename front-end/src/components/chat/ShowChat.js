@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react'
 import DisplayUser from './DisplayUser'
 import {useSelector, useDispatch} from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import ShowMessage from './ShowMessage'
-import {createChat, getChat} from '../../redux/actions/chatAction.js'
+import {createChat, getChat, deleteConversation} from '../../redux/actions/chatAction.js'
 import {uploadImage} from '../../utils/uploadImage'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 
@@ -13,6 +13,7 @@ const ShowChat = () => {
     const dispatch = useDispatch()
 
     const {id} = useParams()
+    const history = useHistory()
 
     const [user, setUser] = useState([])
     const [text, setText] = useState('')
@@ -23,15 +24,6 @@ const ShowChat = () => {
     const [page, setPage] = useState(0)
     const [media, setMedia] = useState([])
 
-    // const [data, setData] = useState([])
-
-    // useEffect(() => {
-    //     const newData = chatReducer.data.find(item => item._id === id)
-    //     console.log(newData)
-    //    if(newData){
-    //         setData(newData.chat)
-    //     } 
-    // }, [id, chatReducer.data])
     
     useEffect(() => {
         const newUser = chatReducer.users.find(user => user._id === id)
@@ -136,12 +128,22 @@ const ShowChat = () => {
         }
     }, [id, authReducer, page, dispatch, chatReducer.resultData])
 
+
+    const handleDeleteConversation = () => {
+        dispatch(deleteConversation({authReducer, id}))
+        return history.push('/chat')
+    }
+
     return (
         <>
             <div className="chat_header">
-            <DisplayUser user={user}>
-                <i className="fas fa-trash-alt mr-2" />
-            </DisplayUser>
+                {
+                    user.length !== 0 &&
+                    <DisplayUser user={user}>
+                        <i className="fas fa-trash-alt mr-2" style={{cursor: 'pointer'}}
+                        onClick={handleDeleteConversation} />
+                    </DisplayUser>
+                }
             </div>
 
             <div className="chat_container" style={{height: media.length > 0 ? 'calc(100% - 200px)' : ''}}>
